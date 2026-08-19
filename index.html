@@ -270,6 +270,37 @@
     min-height: 18px;
   }
 
+  /* ---------- 추후 공개 목차 카드 ---------- */
+  .toc-card.locked { opacity: 0.55; cursor: default; }
+  .toc-card.locked:active { transform: none; }
+  .toc-card.locked .pg { font-weight: 700; }
+
+  /* ---------- p.4 ε-δ ---------- */
+  .mathbtn.play { background: var(--accent-deep); border-color: var(--accent-deep); color: #fff; font-weight: 700; }
+  .mathbtn.play.on { background: var(--status-critical); border-color: var(--status-critical); }
+  .mathbtn.epsb { color: #2a78d6; border-color: rgba(42,120,214,0.5); }
+  .mathbtn.delb { color: #e8175d; border-color: rgba(232,23,93,0.5); }
+  .mathbtn.epsb.flash { background: #2a78d6; color: #fff; }
+  .mathbtn.delb.flash { background: #e8175d; color: #fff; }
+  .mathbtn.on2 { background: var(--series-1); border-color: var(--series-1); color: #fff; }
+  .p4formula {
+    margin: 12px 0 2px; text-align: center;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 16.5px; color: var(--text-secondary);
+    letter-spacing: 0.01em;
+  }
+  .p4formula sub { font-size: 11.5px; }
+  #p4readout {
+    margin: 8px 0 0; font-size: 13.5px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-variant-numeric: tabular-nums; color: var(--text-secondary);
+    min-height: 20px;
+  }
+  #p4readout .ok { color: var(--status-good); font-weight: 700; }
+  #p4readout .bad { color: var(--status-critical); font-weight: 700; }
+
   .seg { display: flex; gap: 6px; margin-top: 10px; }
   .seg button {
     flex: 1; padding: 8px 6px; border-radius: 8px;
@@ -334,6 +365,95 @@
     text-align: center; color: var(--text-muted);
     font-size: 11.5px; margin-top: 26px; line-height: 1.6;
   }
+
+  /* ---------- 지오지브라 바로가기 ---------- */
+  .geolink {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin: 2px 0 10px;
+    font-size: 13px; font-weight: 600;
+    color: var(--accent-deep); text-decoration: none;
+    border: 1px dashed var(--border);
+    border-radius: 999px; padding: 7px 14px;
+    background: var(--surface-1);
+  }
+  .geolink:active { transform: scale(0.98); }
+
+  /* ---------- 오버레이 대화상자 (이름표 / 소감) ---------- */
+  .overlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(0,0,0,0.45);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .overlay.hidden { display: none; }
+  .dialog {
+    width: 100%; max-width: 420px;
+    background: var(--surface-1);
+    border-radius: 18px; padding: 22px 20px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  }
+  .dialog h3 { margin: 0 0 6px; font-size: 18px; }
+  .dialog p.sub { margin: 0 0 14px; font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; }
+  .dialog input, .dialog textarea {
+    width: 100%; font-family: inherit;
+    font-size: 16px; padding: 12px;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    background: var(--page); color: var(--text-primary);
+    margin-bottom: 10px;
+  }
+  .dialog textarea { min-height: 96px; resize: vertical; }
+  .dialog .row { display: flex; gap: 10px; margin-top: 4px; }
+  .dialog .row button {
+    flex: 1; font-family: inherit; font-size: 15px; font-weight: 700;
+    padding: 13px; border-radius: 11px; cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--chip-bg); color: var(--text-primary);
+  }
+  .dialog .row button.primary {
+    background: var(--accent-deep); border-color: var(--accent-deep); color: #fff;
+  }
+  .dialog .warn { font-size: 12px; color: var(--status-critical); margin: 0 0 8px; }
+  .dialog .warn.hidden { display: none; }
+  #obErr { font-size: 12.5px; color: var(--status-critical); margin: 0 0 8px; display: none; }
+  #obErr.show { display: block; }
+
+  /* ---------- 승인 대기 잠금 화면 ---------- */
+  #lockOverlay {
+    position: fixed; inset: 0; z-index: 120;
+    background: var(--page);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px; text-align: center;
+  }
+  #lockOverlay.hidden { display: none; }
+  .lockbox { max-width: 380px; }
+  .lockbox .big { font-size: 44px; margin-bottom: 10px; }
+  .lockbox h3 { font-size: 19px; margin: 0 0 8px; }
+  .lockbox p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin: 0 0 18px; }
+  .lockbox .spin {
+    width: 26px; height: 26px; margin: 0 auto 16px;
+    border: 3px solid var(--border); border-top-color: var(--accent-deep);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .lockbox button {
+    font-family: inherit; font-size: 14px; font-weight: 700;
+    padding: 12px 22px; border-radius: 11px; cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--surface-1); color: var(--text-primary);
+  }
+  .lockbox .who { font-size: 12px; color: var(--text-muted); margin-top: 16px; }
+
+  #studentLine {
+    text-align: center; font-size: 12px; color: var(--text-muted);
+    margin: 14px 0 0;
+  }
+  #studentLine button {
+    font-family: inherit; font-size: 11.5px;
+    background: none; border: none; cursor: pointer;
+    color: var(--accent-deep); text-decoration: underline;
+    padding: 0 2px;
+  }
 </style>
 </head>
 <body>
@@ -367,24 +487,25 @@
         </span>
         <span class="pg">p.2</span>
       </button>
-      <button class="toc-card" data-gopage="6" type="button">
+      <div class="toc-card locked">
         <span class="toc-num" style="background:var(--series-2)">2</span>
         <span>
           <p class="t">미분</p>
           <p class="d">두 점을 잇는 직선을 한없이 가깝게 — 평균변화율이 순간변화율이 되는 순간.</p>
         </span>
-        <span class="pg">p.6</span>
-      </button>
-      <button class="toc-card" data-gopage="9" type="button">
+        <span class="pg">추후 공개</span>
+      </div>
+      <div class="toc-card locked">
         <span class="toc-num" style="background:var(--series-3)">3</span>
         <span>
           <p class="t">적분</p>
           <p class="d">직사각형을 잘게 쪼갤수록 곡선 아래 넓이에 다가간다 — 구분구적법.</p>
         </span>
-        <span class="pg">p.9</span>
-      </button>
+        <span class="pg">추후 공개</span>
+      </div>
     </div>
     <footer class="appfoot">이 교과서는 선생님이 내용을 고치면 자동으로 새 버전이 배달됩니다.<br/>홈 화면에 추가해 두면 오프라인에서도 열 수 있어요.</footer>
+    <p id="studentLine"></p>
   </section>
 
   <!-- ═══════════ p.2 : 교과서 54p ═══════════ -->
@@ -432,6 +553,7 @@
         <button data-f="1/x" data-a="-∞" type="button">1/x, a=−∞</button>
       </div>
       <p id="p3err"></p>
+      <a class="geolink" href="https://www.geogebra.org/graphing" target="_blank" rel="noopener">여기서 안 그려지는 함수는? 지오지브라에서 직접 그려보기 ↗</a>
       <div class="demo-stage">
         <div class="cwrap">
           <canvas id="p3canvas" width="1080" height="880"></canvas>
@@ -446,161 +568,72 @@
     </div>
   </section>
 
-  <!-- ═══════════ p.4 : (구) 실험1 ═══════════ -->
-  <section class="bookpage" data-title="1단원 · 실험" data-demo="d1">
+  <!-- ═══════════ p.4 : 엡실론-델타 ═══════════ -->
+  <section class="bookpage" data-title="ε-δ" data-demo="p4">
     <div class="bm-ribbon"></div>
     <span class="chap-tag">1단원 · 함수의 극한과 연속</span>
-    <h2>실험 1 · 보이지 않는 틈을 찾아라</h2>
+    <h2>극한의 엄밀한 정의</h2>
 
-    <div class="block demo" id="demo1">
-      <p style="font-size:13.5px;color:var(--text-secondary)">아래 곡선은 완전히 매끄러워 보입니다. 슬라이더로 한 점을 계속 확대해 보세요. 최대 <b>1억 배</b>까지 확대됩니다.</p>
-      <canvas id="d1canvas" width="1200" height="640"></canvas>
-      <div class="seg">
-        <button id="d1btnDisc" class="active" type="button">x = 3 근처 (수상한 지점)</button>
-        <button id="d1btnCont" type="button">x = 1.5 근처 (비교용)</button>
+    <div class="block demo">
+      <div class="demo-stage">
+        <div class="cwrap">
+          <canvas id="p4canvas" width="1080" height="880"></canvas>
+          <div class="zoombadge" id="p4badge">×1</div>
+        </div>
+        <div class="side-btns">
+          <button class="mathbtn kr play" id="p4auto" type="button">▶ 자동 재생</button>
+          <button class="mathbtn epsb" id="p4eps" type="button"><span class="it">ε</span> 줄이기</button>
+          <button class="mathbtn delb" id="p4del" type="button"><span class="it">δ</span> 찾기</button>
+          <button class="mathbtn kr" id="p4zoom" type="button">확대</button>
+          <button class="mathbtn kr" id="p4reset" type="button">처음부터</button>
+        </div>
       </div>
-      <div class="ctrl-row">
-        <button class="mini primary" id="d1play" type="button">▶ 자동 확대</button>
-        <button class="mini" id="d1reset" type="button">되돌리기</button>
-        <span class="val" id="d1zoom">×1</span>
-      </div>
-      <div class="ctrl-row">
-        <label class="slab">확대 배율</label>
-        <input type="range" id="d1slider" min="0" max="1" step="0.0001" value="0" />
-      </div>
-      <div class="readout" id="d1msg"></div>
-      <p class="think"><b>생각해 보기</b> — 배율이 얼마일 때 처음으로 틈이 "의심"되기 시작했나요? 좌극한과 우극한이 다르면 극한값은 왜 존재할 수 없을까요?</p>
+      <p class="p4formula">lim<sub>x→a</sub> f(x) = L &nbsp;⇔&nbsp; ∀ε&gt;0, ∃δ&gt;0 s.t. 0&lt;|x−a|&lt;δ ⇒ |f(x)−L|&lt;ε</p>
+      <p id="p4readout"></p>
     </div>
   </section>
 
-  <!-- ═══════════ p.4 : 1단원 정리 ═══════════ -->
-  <section class="bookpage" data-title="1단원 · 정리">
-    <div class="bm-ribbon"></div>
-    <span class="chap-tag">1단원 · 함수의 극한과 연속</span>
-    <h2>정리 — 눈이 아니라 극한으로</h2>
+</div>
 
-    <div class="block">
-      <h3>정리</h3>
-      <p>실험 1의 함수는 x = 3에서 좌극한(1.00)과 우극한(1.05)이 서로 다르므로 lim<sub>x→3</sub> f(x)는 <b>존재하지 않고</b>, 따라서 x = 3에서 <b>불연속</b>입니다.</p>
-      <p>그래프가 이어져 보이는 것은 우리 눈의 해상도 문제일 뿐입니다. 연속의 판정은 언제나 <b>극한</b>으로 해야 합니다.</p>
+<!-- ═══════════ 승인 대기 잠금 ═══════════ -->
+<div id="lockOverlay" class="hidden">
+  <div class="lockbox">
+    <div class="big">🔒</div>
+    <h3>선생님의 승인을 기다리고 있어요</h3>
+    <p>가입 신청이 선생님께 전달됐어요.<br/>승인되면 이 화면이 자동으로 열립니다.<br/><span style="font-size:12px;color:var(--text-muted)">(인터넷이 연결되어 있어야 해요)</span></p>
+    <div class="spin"></div>
+    <button id="lockCheck" type="button">지금 확인하기</button>
+    <p class="who" id="lockWho"></p>
+  </div>
+</div>
+
+<!-- ═══════════ 이름표 (최초 1회) ═══════════ -->
+<div id="onboard" class="overlay hidden">
+  <div class="dialog">
+    <h3>처음 왔구나! 이름표를 만들자</h3>
+    <p class="sub">한 번만 적으면 이 아이패드에 저장돼요. 다음부터는 바로 교과서가 열립니다.</p>
+    <p id="obErr">반, 학번, 이름을 모두 적어 주세요.</p>
+    <input id="obBan" type="text" inputmode="numeric" placeholder="반 (예: 3)" autocomplete="off" />
+    <input id="obId" type="text" inputmode="numeric" placeholder="학번 (예: 20315)" autocomplete="off" />
+    <input id="obName" type="text" placeholder="이름" autocomplete="off" />
+    <div class="row">
+      <button id="obStart" class="primary" type="button">시작하기</button>
     </div>
-    <div class="block">
-      <h3>이 페이지는 계속 자랍니다</h3>
-      <p style="color:var(--text-secondary)">여기에 예제, 연습문제, 오답 클리닉 등이 추가될 예정입니다. 선생님이 내용을 업데이트하면 여러분의 앱에도 자동으로 반영됩니다.</p>
+  </div>
+</div>
+
+<!-- ═══════════ 책갈피 소감 ═══════════ -->
+<div id="fbOverlay" class="overlay hidden">
+  <div class="dialog">
+    <h3>🔖 오늘 여기까지!</h3>
+    <p class="sub">오늘 배운 내용, 한 줄 소감을 선생님께 보낼까요? <span id="fbWho"></span></p>
+    <textarea id="fbText" placeholder="예: 극한이 뭔지 오늘 처음으로 감이 왔어요!"></textarea>
+    <p id="fbNote" class="warn hidden">(선생님 확인용: 아직 관리 시트가 연결되지 않아 전송은 되지 않습니다)</p>
+    <div class="row">
+      <button id="fbSkip" type="button">건너뛰기</button>
+      <button id="fbSend" class="primary" type="button">보내기</button>
     </div>
-  </section>
-
-  <!-- ═══════════ p.5 : 2단원 개념 ═══════════ -->
-  <section class="bookpage" data-title="2단원 · 개념">
-    <div class="bm-ribbon"></div>
-    <span class="chap-tag">2단원 · 미분</span>
-    <h2>순간변화율은 어떻게 태어나는가</h2>
-    <p class="lead">"지금 이 순간의 속도"는 어떻게 정의할 수 있을까요?</p>
-
-    <div class="block">
-      <h3>핵심 개념</h3>
-      <p>구간 [a, a+h]에서의 <b>평균변화율</b>은 두 점을 잇는 직선(할선)의 기울기입니다. 여기서 h를 0으로 한없이 보내면 — 즉 극한을 취하면 — 그 값이 x = a에서의 <b>순간변화율(미분계수)</b>이 됩니다.</p>
-      <div class="formula">f′(a) = lim<sub>h→0</sub> ( f(a+h) − f(a) ) / h</div>
-      <p class="think"><b>준비 발문</b> — 자동차 계기판의 속도계는 "순간속도"를 보여줍니다. 하지만 속도 = 거리 ÷ 시간인데, "순간"의 시간은 0초 아닌가요? 0으로 나눌 수는 없는데... 다음 페이지에서 이 수수께끼를 풀어 봅시다.</p>
-    </div>
-  </section>
-
-  <!-- ═══════════ p.6 : 실험2 ═══════════ -->
-  <section class="bookpage" data-title="2단원 · 실험" data-demo="d2">
-    <div class="bm-ribbon"></div>
-    <span class="chap-tag">2단원 · 미분</span>
-    <h2>실험 2 · 할선을 접선으로 만들어라</h2>
-
-    <div class="block demo" id="demo2">
-      <p style="font-size:13.5px;color:var(--text-secondary)">주황 직선은 두 점 (a, f(a))와 (a+h, f(a+h))를 잇는 할선입니다. h 슬라이더를 왼쪽으로 밀어 0에 가깝게 만들어 보세요. 연한 초록 선이 진짜 접선입니다.</p>
-      <canvas id="d2canvas" width="1200" height="640"></canvas>
-      <div class="ctrl-row">
-        <label class="slab">점의 위치 a</label>
-        <input type="range" id="d2a" min="-1.6" max="1.6" step="0.05" value="0.6" />
-        <span class="val" id="d2aval">a = 0.60</span>
-      </div>
-      <div class="ctrl-row">
-        <label class="slab">간격 h</label>
-        <input type="range" id="d2h" min="0" max="1" step="0.0001" value="1" />
-        <span class="val" id="d2hval">h = 2.000</span>
-      </div>
-      <div class="readout" id="d2msg"></div>
-      <p class="think"><b>생각해 보기</b> — h를 아무리 줄여도 평균변화율이 어떤 하나의 값으로 다가가는 이유는 무엇일까요? a를 움직이면 순간변화율은 어떻게 달라지나요? (a가 곡선의 꼭짓점일 때는?)</p>
-    </div>
-  </section>
-
-  <!-- ═══════════ p.7 : 2단원 정리 ═══════════ -->
-  <section class="bookpage" data-title="2단원 · 정리">
-    <div class="bm-ribbon"></div>
-    <span class="chap-tag">2단원 · 미분</span>
-    <h2>정리 — 미분은 기울기의 극한</h2>
-
-    <div class="block">
-      <h3>정리</h3>
-      <p>h → 0일 때 할선은 한 점에서 곡선에 스치는 <b>접선</b>이 되고, 평균변화율의 극한이 곧 접선의 기울기 f′(a)입니다.</p>
-      <p>미분은 새로운 계산 규칙이기 이전에, 1단원에서 배운 <b>극한을 기울기에 적용한 것</b>입니다.</p>
-    </div>
-    <div class="block">
-      <h3>이 페이지는 계속 자랍니다</h3>
-      <p style="color:var(--text-secondary)">여기에 미분법 공식, 접선의 방정식, 최적화 문제 등이 추가될 예정입니다.</p>
-    </div>
-  </section>
-
-  <!-- ═══════════ p.8 : 3단원 개념 ═══════════ -->
-  <section class="bookpage" data-title="3단원 · 개념">
-    <div class="bm-ribbon"></div>
-    <span class="chap-tag">3단원 · 적분</span>
-    <h2>곡선 아래의 넓이를 재는 법</h2>
-    <p class="lead">곡선 아래의 넓이는 자로 잴 수 없습니다. 하지만 직사각형이라면?</p>
-
-    <div class="block">
-      <h3>핵심 개념</h3>
-      <p>구간을 n등분해 직사각형 넓이의 합(리만 합)을 만들고, n을 한없이 크게 하면 그 극한이 곡선 아래의 정확한 넓이 — <b>정적분</b>이 됩니다.</p>
-      <div class="formula">∫<sub>a</sub><sup>b</sup> f(x) dx = lim<sub>n→∞</sub> Σ f(x<sub>k</sub>) Δx</div>
-      <p class="think"><b>준비 발문</b> — 모눈종이 위에 손바닥을 대고 윤곽을 그린 뒤, 칸 수를 세어 넓이를 어림해 본 적 있나요? 칸이 작아질수록 어떻게 될까요?</p>
-    </div>
-  </section>
-
-  <!-- ═══════════ p.9 : 실험3 ═══════════ -->
-  <section class="bookpage" data-title="3단원 · 실험" data-demo="d3">
-    <div class="bm-ribbon"></div>
-    <span class="chap-tag">3단원 · 적분</span>
-    <h2>실험 3 · 직사각형으로 곡선을 붙잡아라</h2>
-
-    <div class="block demo" id="demo3">
-      <p style="font-size:13.5px;color:var(--text-secondary)">f(x) = 0.2x² + 0.5의 그래프 아래 [0, 4] 구간의 넓이를 직사각형으로 어림합니다. n을 키워 보세요.</p>
-      <canvas id="d3canvas" width="1200" height="640"></canvas>
-      <div class="seg">
-        <button id="d3left" class="active" type="button">왼쪽 높이 (부족하게)</button>
-        <button id="d3right" type="button">오른쪽 높이 (넘치게)</button>
-      </div>
-      <div class="ctrl-row">
-        <label class="slab">직사각형 n개</label>
-        <input type="range" id="d3n" min="1" max="200" step="1" value="4" />
-        <span class="val" id="d3nval">n = 4</span>
-      </div>
-      <div class="readout" id="d3msg"></div>
-      <p class="think"><b>생각해 보기</b> — 왼쪽 합은 항상 부족하고 오른쪽 합은 항상 넘치는 이유는 무엇일까요? (힌트: 이 함수는 [0,4]에서 증가합니다.) n이 커질수록 두 합의 차이는 어떻게 되나요?</p>
-    </div>
-  </section>
-
-  <!-- ═══════════ p.10 : 3단원 정리 ═══════════ -->
-  <section class="bookpage" data-title="3단원 · 정리">
-    <div class="bm-ribbon"></div>
-    <span class="chap-tag">3단원 · 적분</span>
-    <h2>정리 — 모든 길은 극한으로</h2>
-
-    <div class="block">
-      <h3>정리</h3>
-      <p>왼쪽 합과 오른쪽 합은 참값 <b>≈ 6.267</b>을 사이에 두고 양쪽에서 조여 옵니다. n → ∞의 극한에서 두 합은 같은 값에 도달하고, 그것이 정적분의 값입니다.</p>
-      <p>적분 역시 그 뿌리는 <b>극한</b>입니다 — 미적분 전체가 극한이라는 하나의 아이디어 위에 서 있는 셈입니다.</p>
-    </div>
-    <div class="block">
-      <h3>이 페이지는 계속 자랍니다</h3>
-      <p style="color:var(--text-secondary)">여기에 정적분의 성질, 넓이 문제, 속도와 거리 등이 추가될 예정입니다.</p>
-    </div>
-  </section>
-
+  </div>
 </div>
 
 <!-- ═══════════ bottom pager ═══════════ -->
@@ -622,7 +655,7 @@
 (function(){
   "use strict";
 
-  var APP_VERSION = "1.3.0";
+  var APP_VERSION = "1.6.0";
   document.getElementById("verLabel").textContent = "v" + APP_VERSION;
 
   /* ========== storage (책갈피) ========== */
@@ -679,12 +712,11 @@
     refreshBmUI();
     p2stop(); // 페이지를 떠날 때 모션 정지·초기화
     if (window.p3api) window.p3api.stop();
+    p4stop();
     var demo = pagesEls[n - 1].getAttribute("data-demo");
     if (demo === "p2") p2render(0);
     if (demo === "p3" && window.p3api) window.p3api.render(0);
-    if (demo === "d1") d1render();
-    if (demo === "d2") d2render();
-    if (demo === "d3") d3render();
+    if (demo === "p4") p4render(0);
   }
 
   prevBtn.addEventListener("click", function(){ gotoPage(current - 1); });
@@ -709,7 +741,7 @@
     });
   });
 
-  /* 책갈피 버튼: 현재 페이지에 꽂기 / 빼기 */
+  /* 책갈피 버튼: 현재 페이지에 꽂기 / 빼기 (꽂을 때 소감 창) */
   bmBtn.addEventListener("click", function(){
     if (bookmark() === current){
       store.del(BM_KEY);
@@ -717,8 +749,160 @@
     } else {
       store.set(BM_KEY, String(current));
       toast("'오늘 여기까지' 책갈피를 꽂았습니다. 다음에 " + current + "쪽부터 열립니다.");
+      openFeedback(current);
     }
     refreshBmUI();
+  });
+
+  /* ================================================= */
+  /* 학생 이름표 (최초 1회) · 관리자 승인 · 소감 수집     */
+  /* ================================================= */
+  /* ★ 연결 방법: 선생님이 구글 시트에 Apps Script(제공된 코드)를 붙여
+     "웹 앱"으로 배포한 뒤 그 URL을 아래 API_URL에 넣습니다.
+     (URL을 Claude에게 주시면 채워서 새 버전을 드립니다)
+     - API_URL이 비어 있으면: 승인 절차 없이 바로 사용 가능,
+       소감은 전송되지 않고 기기에만 보관됩니다. */
+  var API_URL = "https://script.google.com/macros/s/AKfycbwHF26xVoHuk0Zq80P3DLE1QVNFKX994bIzDf7kMw2bjZH0dl7iKLqe9Mk92OmU9x1l/exec";
+
+  var STU_KEY = "mc_student";
+  var DEV_KEY = "mc_device";
+  var APV_KEY = "mc_approved";
+
+  function deviceId(){
+    var d = store.get(DEV_KEY);
+    if (!d){
+      d = "d" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+      store.set(DEV_KEY, d);
+    }
+    return d;
+  }
+  function apiPost(params){
+    if (!API_URL) return Promise.reject(new Error("no api"));
+    var fd = new FormData();
+    Object.keys(params).forEach(function(k){ fd.append(k, params[k]); });
+    return fetch(API_URL, { method: "POST", mode: "no-cors", body: fd });
+  }
+
+  function getStudent(){
+    try { return JSON.parse(store.get(STU_KEY) || "null"); } catch(e){ return null; }
+  }
+  function setStudent(s){ store.set(STU_KEY, JSON.stringify(s)); }
+
+  var onboardEl = document.getElementById("onboard");
+  var obBan = document.getElementById("obBan");
+  var obId = document.getElementById("obId");
+  var obName = document.getElementById("obName");
+  var obErr = document.getElementById("obErr");
+  var studentLine = document.getElementById("studentLine");
+
+  function refreshStudentLine(){
+    var s = getStudent();
+    if (s){
+      studentLine.innerHTML = s.ban + "반 " + s.hakbun + " " + s.name +
+        " <button id='editInfo' type='button'>내 정보 수정</button>";
+      document.getElementById("editInfo").addEventListener("click", function(){
+        obBan.value = s.ban; obId.value = s.hakbun; obName.value = s.name;
+        onboardEl.classList.remove("hidden");
+      });
+    } else {
+      studentLine.innerHTML = "";
+    }
+  }
+  document.getElementById("obStart").addEventListener("click", function(){
+    var ban = obBan.value.trim(), id = obId.value.trim(), name = obName.value.trim();
+    if (!ban || !id || !name){ obErr.classList.add("show"); return; }
+    obErr.classList.remove("show");
+    var isNew = !getStudent();
+    setStudent({ ban: ban, hakbun: id, name: name });
+    onboardEl.classList.add("hidden");
+    refreshStudentLine();
+    if (API_URL){
+      // 가입 신청(또는 정보 갱신)을 선생님 시트로 전송
+      apiPost({ action: "register", ban: ban, hakbun: id, name: name, device: deviceId() }).catch(function(){});
+      if (isNew) toast(name + " 학생, 가입 신청을 보냈어요!");
+    } else if (isNew){
+      toast(name + " 학생, 환영해요!");
+    }
+    updateGate();
+  });
+  if (!getStudent()) onboardEl.classList.remove("hidden");
+  refreshStudentLine();
+
+  /* ---- 승인 게이트 ---- */
+  var lockOverlay = document.getElementById("lockOverlay");
+  var lockWho = document.getElementById("lockWho");
+  var pollTimer = null;
+
+  function isApproved(){ return store.get(APV_KEY) === "1"; }
+
+  function checkStatus(){
+    if (!API_URL) return;
+    fetch(API_URL + "?action=status&device=" + encodeURIComponent(deviceId()))
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if (j && j.approved){
+          store.set(APV_KEY, "1");
+          toast("승인 완료! 환영해요 🎉");
+          updateGate();
+        }
+      })
+      .catch(function(){});
+  }
+  function updateGate(){
+    var s = getStudent();
+    var needLock = !!API_URL && !!s && !isApproved();
+    lockOverlay.classList.toggle("hidden", !needLock);
+    if (needLock){
+      lockWho.textContent = s.ban + "반 " + s.hakbun + " " + s.name;
+      if (!pollTimer){
+        pollTimer = setInterval(checkStatus, 15000);
+        checkStatus();
+      }
+    } else if (pollTimer){
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+  }
+  document.getElementById("lockCheck").addEventListener("click", checkStatus);
+  updateGate();
+
+  /* ---- 소감 다이얼로그 ---- */
+  var fbOverlay = document.getElementById("fbOverlay");
+  var fbText = document.getElementById("fbText");
+  var fbNote = document.getElementById("fbNote");
+  var fbPage = 1;
+
+  function openFeedback(page){
+    fbPage = page;
+    var s = getStudent();
+    document.getElementById("fbWho").textContent =
+      s ? "(" + s.ban + "반 " + s.name + " · " + page + "쪽)" : "";
+    fbText.value = "";
+    fbNote.classList.toggle("hidden", !!API_URL);
+    fbOverlay.classList.remove("hidden");
+  }
+  document.getElementById("fbSkip").addEventListener("click", function(){
+    fbOverlay.classList.add("hidden");
+  });
+  document.getElementById("fbSend").addEventListener("click", function(){
+    var note = fbText.value.trim();
+    if (!note){ fbOverlay.classList.add("hidden"); return; }
+    var s = getStudent() || { ban: "", hakbun: "", name: "" };
+    if (API_URL){
+      apiPost({ action: "feedback", ban: s.ban, hakbun: s.hakbun, name: s.name,
+                page: String(fbPage), note: note })
+        .then(function(){ toast("소감을 보냈어요. 고마워요!"); })
+        .catch(function(){ toast("전송이 안 됐어요. 인터넷 연결을 확인해 주세요."); });
+    } else {
+      // 관리 시트 미연결: 기기에만 보관
+      try {
+        var pend = JSON.parse(store.get("mc_fb_pending") || "[]");
+        pend.push({ t: Date.now(), page: fbPage, note: note, ban: s.ban, hakbun: s.hakbun, name: s.name });
+        store.set("mc_fb_pending", JSON.stringify(pend));
+      } catch(e){}
+      toast("소감을 저장했어요!");
+    }
+    fbOverlay.classList.add("hidden");
   });
 
   /* ========== shared canvas helpers ========== */
@@ -1794,270 +1978,333 @@
   })();
 
   /* ================================================= */
-  /* DEMO 1 — discontinuity zoom                       */
+  /* p.4 — 엡실론·델타 (ε 줄이기 → δ 찾기 + 확대 추적)  */
   /* ================================================= */
-  var X0 = 3, JUMP = 0.05;
-  function d1g(x){ return 0.2*x*x - 0.6*x + 1; }
-  function d1f(x){ return d1g(x) + (x >= X0 ? JUMP : 0); }
-  var LL = d1g(X0), RL = d1g(X0) + JUMP;
-  var d1 = { mode: "disc", t: 0, playing: false };
-  var D1MAX = 1e8, D1W0 = 5;
-  var d1canvas = document.getElementById("d1canvas");
-  var d1ctx = d1canvas.getContext("2d");
-  var d1slider = document.getElementById("d1slider");
-  var d1msg = document.getElementById("d1msg");
-  var d1zoomEl = document.getElementById("d1zoom");
+  var p4stop, p4render;
+  (function(){
+    var INK = "#111111", PINK = "#e8175d", BLUE = "#2a78d6", RED = "#d03b3b";
+    function MATHF(px){ return "italic " + px + "px Georgia, 'Times New Roman', serif"; }
 
-  function fmtZoom(z){
-    z = Math.round(z);
-    if (z < 10000) return "×" + z.toLocaleString("ko-KR");
-    var eok = Math.floor(z / 1e8), man = Math.floor((z % 1e8) / 1e4);
-    var s = "×";
-    if (eok > 0) s += eok + "억 ";
-    if (man > 0) s += man + "만";
-    if (eok === 0 && man === 0) s += z.toLocaleString("ko-KR");
-    return s.trim();
-  }
+    var cv = document.getElementById("p4canvas");
+    var ctx = cv.getContext("2d");
+    var W = cv.width, H = cv.height;
+    var badge = document.getElementById("p4badge");
 
-  function d1render(){
-    var W = d1canvas.width, H = d1canvas.height;
-    var z = Math.pow(D1MAX, d1.t), w = D1W0 / z;
-    var xc = d1.mode === "disc" ? X0 : 1.5;
-    var xMin = xc - w, xMax = xc + w;
-    var pts = [], yMin = Infinity, yMax = -Infinity;
-    for (var i = 0; i <= 600; i++){
-      var x = xMin + (xMax - xMin) * i / 600, y = d1f(x);
-      pts.push([x, y]);
-      if (y < yMin) yMin = y; if (y > yMax) yMax = y;
+    function f(x){ return 0.5 * x * x + 1; }
+    var A = 1, L = f(A);
+
+    var xMin = -1.7, xMax = 3.3, yMin = -0.55, yMax = 3.75;
+    var sX0 = W / (xMax - xMin), sY0 = H / (yMax - yMin);
+    var C0X = (xMin + xMax) / 2, C0Y = (yMin + yMax) / 2;
+
+    var EPS0 = 0.5, DEL0 = 1.0;
+    var eps = EPS0, del = DEL0;
+    var epsT = EPS0, delT = DEL0;
+    var bandsOn = false;
+    var zoomOn = false;
+    var Zcur = 1, zb = 0;
+
+    function targetZ(){
+      if (!zoomOn || !bandsOn) return 1;
+      var zw = (0.52 * W) / (2 * delT * sX0);
+      var zh = (0.52 * H) / (2 * epsT * sY0);
+      return Math.max(1, Math.min(zw, zh));
     }
-    var range = yMax - yMin;
-    if (!isFinite(range) || range < 1e-9){ range = 1e-6; }
-    var pad = range * 0.3;
-    var F = frame(d1ctx, W, H, xMin, xMax, yMin - pad, yMax + pad);
-    var ctx = d1ctx, col = F.col;
-    var inWin = X0 > xMin && X0 < xMax;
+    function findDelta(e){
+      var d = Math.min(1, DEL0);
+      for (var i = 0; i < 400; i++){
+        var ok = true;
+        for (var k = 0; k <= 60; k++){
+          var x = A - d + (2 * d) * k / 60;
+          if (Math.abs(f(x) - L) >= e){ ok = false; break; }
+        }
+        if (ok) return d;
+        d *= 0.97;
+      }
+      return d;
+    }
+    function fits(e, d){
+      for (var k = 0; k <= 80; k++){
+        var x = A - d + (2 * d) * k / 80;
+        if (Math.abs(f(x) - L) > e) return false;
+      }
+      return true;
+    }
 
-    ctx.lineWidth = 3.5; ctx.strokeStyle = col.c1; ctx.lineJoin = "round"; ctx.lineCap = "round";
-    function branch(fn){
+    function render(){
+      var ease = zb * zb * (3 - 2 * zb);
+      var camX = C0X + (A - C0X) * ease;
+      var camY = C0Y + (L - C0Y) * ease;
+      var sX = sX0 * Zcur, sY = sY0 * Zcur;
+      function sx(x){ return W/2 + (x - camX) * sX; }
+      function sy(y){ return H/2 - (y - camY) * sY; }
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, H);
+
+      var axisY = sy(0), axisX = sx(0);
+      var xVis = axisY > -60 && axisY < H + 60;
+      var yVis = axisX > -60 && axisX < W + 60;
+      var pa = sx(A), pL = sy(L);
+
+      if (bandsOn){
+        var yTop = sy(L + eps), yBot = sy(L - eps);
+        ctx.fillStyle = "rgba(42,120,214,0.13)";
+        ctx.fillRect(0, yTop, W, yBot - yTop);
+        ctx.save();
+        ctx.setLineDash([8, 6]);
+        ctx.strokeStyle = BLUE; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(0, yTop); ctx.lineTo(W, yTop); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, yBot); ctx.lineTo(W, yBot); ctx.stroke();
+        ctx.restore();
+
+        var xL = sx(A - del), xR = sx(A + del);
+        ctx.fillStyle = "rgba(232,23,93,0.10)";
+        ctx.fillRect(xL, 0, xR - xL, H);
+        ctx.save();
+        ctx.setLineDash([8, 6]);
+        ctx.strokeStyle = PINK; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(xL, 0); ctx.lineTo(xL, H); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(xR, 0); ctx.lineTo(xR, H); ctx.stroke();
+        ctx.restore();
+      }
+
+      if (xVis){
+        ctx.strokeStyle = INK; ctx.lineWidth = 3.5;
+        ctx.beginPath(); ctx.moveTo(14, axisY); ctx.lineTo(W - 20, axisY); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(W - 14, axisY);
+        ctx.lineTo(W - 30, axisY - 6.5); ctx.lineTo(W - 30, axisY + 6.5);
+        ctx.closePath(); ctx.fillStyle = INK; ctx.fill();
+        ctx.font = MATHF(32); ctx.fillStyle = INK;
+        ctx.textAlign = "center"; ctx.textBaseline = "top";
+        ctx.fillText("x", W - 30, Math.min(axisY + 12, H - 40));
+      }
+      if (yVis){
+        ctx.strokeStyle = INK; ctx.lineWidth = 3.5;
+        ctx.beginPath(); ctx.moveTo(axisX, H - 14); ctx.lineTo(axisX, 26); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(axisX, 20);
+        ctx.lineTo(axisX - 6.5, 36); ctx.lineTo(axisX + 6.5, 36);
+        ctx.closePath(); ctx.fillStyle = INK; ctx.fill();
+        ctx.font = MATHF(32); ctx.fillStyle = INK;
+        ctx.textAlign = "right"; ctx.textBaseline = "bottom";
+        ctx.fillText("y", axisX - 12, 40);
+      }
+      var oCollides = bandsOn && Math.abs(sx(A - del) - axisX) < 40;
+      if (xVis && yVis && !oCollides){
+        ctx.font = MATHF(28); ctx.fillStyle = INK;
+        ctx.textAlign = "right"; ctx.textBaseline = "top";
+        ctx.fillText("O", axisX - 8, axisY + 10);
+      }
+
+      // 곡선 (화면 픽셀 기준 샘플)
+      ctx.strokeStyle = INK; ctx.lineWidth = 4;
+      ctx.lineJoin = "round"; ctx.lineCap = "round";
       ctx.beginPath();
-      var st = false;
-      pts.forEach(function(p){
-        if (!fn(p[0])){ st = false; return; }
-        var px = F.mx(p[0]), py = F.my(p[1]);
-        if (!st){ ctx.moveTo(px, py); st = true; } else ctx.lineTo(px, py);
-      });
+      var n = 400, started = false;
+      for (var i = 0; i <= n; i++){
+        var px = -20 + (W + 40) * i / n;
+        var wx = camX + (px - W/2) / sX;
+        var py = sy(f(wx));
+        if (py < -H || py > 2 * H){ started = false; continue; }
+        if (!started){ ctx.moveTo(px, py); started = true; }
+        else ctx.lineTo(px, py);
+      }
       ctx.stroke();
-    }
-    if (inWin){ branch(function(x){ return x < X0; }); branch(function(x){ return x >= X0; }); }
-    else branch(function(){ return true; });
 
-    var ratio = 0;
-    if (inWin){
-      ratio = Math.abs(F.my(LL) - F.my(RL)) / F.ph;
-      var px0 = F.mx(X0);
+      // δ 구간 안의 곡선 강조
+      if (bandsOn){
+        var n2 = 240, seg = [], curState = null;
+        function flush(color){
+          if (seg.length < 2){ seg = []; return; }
+          ctx.strokeStyle = color; ctx.lineWidth = 6.5;
+          ctx.beginPath();
+          ctx.moveTo(seg[0][0], seg[0][1]);
+          for (var q = 1; q < seg.length; q++) ctx.lineTo(seg[q][0], seg[q][1]);
+          ctx.stroke();
+          seg = [];
+        }
+        for (var i2 = 0; i2 <= n2; i2++){
+          var x2 = A - del + (2 * del) * i2 / n2;
+          var y2 = f(x2);
+          var st = (Math.abs(y2 - L) <= eps) ? "in" : "out";
+          if (curState !== null && st !== curState){
+            seg.push([sx(x2), sy(y2)]);
+            flush(curState === "in" ? BLUE : RED);
+          }
+          curState = st;
+          seg.push([sx(x2), sy(y2)]);
+        }
+        flush(curState === "in" ? BLUE : RED);
+      }
+
+      // 점선 + 점 (a, L)
       ctx.save();
-      ctx.setLineDash([7, 6]); ctx.strokeStyle = col.c2; ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(px0, F.padT); ctx.lineTo(px0, F.padT + F.ph); ctx.stroke();
+      ctx.setLineDash([9, 8]);
+      ctx.strokeStyle = INK; ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.moveTo(pa, pL); ctx.lineTo(pa, xVis ? axisY : H); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(pa, pL); ctx.lineTo(yVis ? axisX : 0, pL); ctx.stroke();
       ctx.restore();
-      if (ratio > 0.02){
-        var r = 8;
-        ctx.beginPath(); ctx.arc(px0, F.my(LL), r, 0, 7);
-        ctx.fillStyle = col.surface; ctx.fill();
-        ctx.lineWidth = 3; ctx.strokeStyle = col.c1; ctx.stroke();
-        ctx.beginPath(); ctx.arc(px0, F.my(RL), r, 0, 7);
-        ctx.fillStyle = col.c1; ctx.fill();
+      ctx.beginPath(); ctx.arc(pa, pL, 8, 0, 7);
+      ctx.fillStyle = INK; ctx.fill();
+
+      // 라벨
+      function halo(text, x, y, color, font){
+        ctx.save();
+        ctx.font = font;
+        ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 7; ctx.lineJoin = "round";
+        ctx.strokeText(text, x, y);
+        ctx.fillStyle = color; ctx.fillText(text, x, y);
+        ctx.restore();
       }
-      if (ratio > 0.3){
-        ctx.font = "600 21px system-ui, -apple-system, sans-serif";
-        ctx.fillStyle = col.bad; ctx.textAlign = "left"; ctx.textBaseline = "middle";
-        ctx.fillText("간격 = 0.05", Math.min(F.padL + F.pw - 150, F.mx(X0) + 16), (F.my(LL) + F.my(RL)) / 2);
+      var xRow = xVis ? axisY + 12 : H - 44;
+      ctx.textAlign = "center"; ctx.textBaseline = "top";
+      halo("a", pa, xRow, INK, MATHF(30));
+      if (yVis){
+        ctx.textAlign = "right"; ctx.textBaseline = "middle";
+        halo("L", axisX - 12, pL, INK, MATHF(30));
+      } else {
+        ctx.textAlign = "left"; ctx.textBaseline = "middle";
+        halo("L", 16, pL, INK, MATHF(30));
       }
-    } else {
-      ctx.beginPath(); ctx.arc(F.mx(xc), F.my(d1f(xc)), 7, 0, 7);
-      ctx.fillStyle = col.c1; ctx.fill();
+      if (bandsOn){
+        if (yVis){
+          ctx.textAlign = "right"; ctx.textBaseline = "middle";
+          halo("L+ε", axisX - 12, sy(L + eps), BLUE, MATHF(26));
+          halo("L−ε", axisX - 12, sy(L - eps), BLUE, MATHF(26));
+        } else {
+          ctx.textAlign = "left"; ctx.textBaseline = "middle";
+          halo("L+ε", 16, sy(L + eps), BLUE, MATHF(26));
+          halo("L−ε", 16, sy(L - eps), BLUE, MATHF(26));
+        }
+        ctx.textAlign = "center"; ctx.textBaseline = "top";
+        halo("a−δ", sx(A - del), xRow, PINK, MATHF(26));
+        halo("a+δ", sx(A + del), xRow, PINK, MATHF(26));
+      }
+
+      if (Zcur > 1.05){
+        badge.classList.add("show");
+        badge.textContent = "×" + (Zcur < 10 ? Zcur.toFixed(1) : Math.round(Zcur).toLocaleString("ko-KR"));
+      } else badge.classList.remove("show");
+    }
+    p4render = function(){ render(); updateReadout(); };
+
+    var readout = document.getElementById("p4readout");
+    function updateReadout(){
+      if (!bandsOn){ readout.innerHTML = ""; return; }
+      var ok = fits(eps, del);
+      var s = "<i>ε</i> = " + eps.toFixed(3) + " &nbsp;·&nbsp; <i>δ</i> = " + del.toFixed(3) + " &nbsp;·&nbsp; ";
+      if (ok) s += "<span class='ok'>|x−a| < δ 이면 |f(x)−L| < ε ✓</span>";
+      else s += "<span class='bad'>곡선이 파란 띠를 벗어났어요 — δ를 더 좁혀야 해요!</span>";
+      readout.innerHTML = s;
     }
 
-    d1zoomEl.textContent = fmtZoom(z);
-    var html;
-    if (d1.mode === "disc"){
-      if (ratio < 0.05) html = "지금 배율에서는 <b>완전히 매끄러운 곡선</b>처럼 보입니다.";
-      else if (ratio < 0.3) html = "자세히 보세요... x = 3 근처에서 곡선이 <b class='bad'>갈라지려는</b> 것 같지 않나요?";
-      else html = "곡선이 <b class='bad'>두 조각</b>으로 갈라졌습니다! 좌극한 <span class='num'>1.00</span>(○) ≠ 우극한 <span class='num'>1.05</span>(●) → 극한이 존재하지 않으므로 <b class='bad'>불연속</b>입니다.";
-    } else {
-      if (z < 100) html = "비교 모드: x = 1.5 근처를 확대합니다.";
-      else if (z < 1e5) html = "곡선이 점점 <b>평평하게</b> 펴지고 있습니다.";
-      else html = "아무리 확대해도 <b class='good'>하나의 곧은 접선</b>으로만 보입니다 — 이 점은 진짜 연속입니다.";
+    var running = false;
+    function loop(){
+      var done = true;
+      var k = 0.10;
+      if (Math.abs(eps - epsT) > 1e-4){ eps += (epsT - eps) * k; done = false; }
+      else eps = epsT;
+      if (Math.abs(del - delT) > 1e-4){ del += (delT - del) * k; done = false; }
+      else del = delT;
+      var Zt = targetZ();
+      var zbT = (zoomOn && bandsOn) ? 1 : 0;
+      if (Math.abs(zb - zbT) > 0.001){ zb += (zbT - zb) * 0.08; done = false; }
+      else zb = zbT;
+      if (Math.abs(Math.log(Zcur / Zt)) > 0.005){
+        Zcur = Zcur * Math.pow(Zt / Zcur, 0.08);
+        done = false;
+      } else Zcur = Zt;
+      render();
+      updateReadout();
+      if (!done || autoActive) requestAnimationFrame(loop);
+      else running = false;
     }
-    d1msg.innerHTML = html;
-  }
-
-  var d1playBtn = document.getElementById("d1play");
-  var d1start = null;
-  function d1tick(now){
-    if (!d1.playing) return;
-    if (d1start === null) d1start = now - d1.t * 15000;
-    var t = (now - d1start) / 15000;
-    if (t >= 1){ t = 1; d1.playing = false; d1playBtn.textContent = "▶ 다시 재생"; }
-    d1.t = t; d1slider.value = t; d1render();
-    if (d1.playing) requestAnimationFrame(d1tick);
-  }
-  d1playBtn.addEventListener("click", function(){
-    if (d1.t >= 1){ d1.t = 0; d1slider.value = 0; }
-    d1.playing = !d1.playing;
-    d1playBtn.textContent = d1.playing ? "⏸ 일시정지" : "▶ 자동 확대";
-    if (d1.playing){ d1start = null; requestAnimationFrame(d1tick); }
-  });
-  document.getElementById("d1reset").addEventListener("click", function(){
-    d1.playing = false; d1.t = 0; d1slider.value = 0;
-    d1playBtn.textContent = "▶ 자동 확대"; d1render();
-  });
-  d1slider.addEventListener("input", function(){
-    d1.playing = false; d1playBtn.textContent = "▶ 자동 확대";
-    d1.t = parseFloat(d1slider.value); d1render();
-  });
-  document.getElementById("d1btnDisc").addEventListener("click", function(){
-    d1.mode = "disc"; d1.playing = false; d1.t = 0; d1slider.value = 0;
-    d1playBtn.textContent = "▶ 자동 확대";
-    this.classList.add("active"); document.getElementById("d1btnCont").classList.remove("active");
-    d1render();
-  });
-  document.getElementById("d1btnCont").addEventListener("click", function(){
-    d1.mode = "cont"; d1.playing = false; d1.t = 0; d1slider.value = 0;
-    d1playBtn.textContent = "▶ 자동 확대";
-    this.classList.add("active"); document.getElementById("d1btnDisc").classList.remove("active");
-    d1render();
-  });
-
-  /* ================================================= */
-  /* DEMO 2 — secant → tangent                         */
-  /* ================================================= */
-  function d2f(x){ return 0.5*x*x + 0.6; }
-  function d2fp(x){ return x; }
-  var d2canvas = document.getElementById("d2canvas");
-  var d2ctx = d2canvas.getContext("2d");
-  var d2aS = document.getElementById("d2a"), d2hS = document.getElementById("d2h");
-  var H_MAX = 2, H_MIN = 0.001;
-
-  function d2hVal(){
-    var t = parseFloat(d2hS.value);
-    return H_MIN * Math.pow(H_MAX / H_MIN, t);
-  }
-  function d2render(){
-    var W = d2canvas.width, H = d2canvas.height;
-    var a = parseFloat(d2aS.value), h = d2hVal();
-    var xMin = -2.6, xMax = 2.6, yMin = 0, yMax = 4.2;
-    var F = frame(d2ctx, W, H, xMin, xMax, yMin, yMax);
-    var ctx = d2ctx, col = F.col;
-
-    ctx.lineWidth = 3.5; ctx.strokeStyle = col.c1; ctx.lineJoin = "round";
-    ctx.beginPath();
-    for (var i = 0; i <= 300; i++){
-      var x = xMin + (xMax - xMin) * i / 300, y = d2f(x);
-      var px = F.mx(x), py = F.my(Math.min(y, yMax));
-      if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    function go(){
+      if (!running){ running = true; requestAnimationFrame(loop); }
     }
-    ctx.stroke();
 
-    var slope = d2fp(a);
-    ctx.save();
-    ctx.globalAlpha = 0.35;
-    ctx.strokeStyle = col.c3; ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.moveTo(F.mx(xMin), F.my(d2f(a) + slope * (xMin - a)));
-    ctx.lineTo(F.mx(xMax), F.my(d2f(a) + slope * (xMax - a)));
-    ctx.stroke();
-    ctx.restore();
+    var btnAuto = document.getElementById("p4auto");
+    var btnEps = document.getElementById("p4eps");
+    var btnDel = document.getElementById("p4del");
+    var btnZoom = document.getElementById("p4zoom");
+    var btnReset = document.getElementById("p4reset");
 
-    var avg = (d2f(a + h) - d2f(a)) / h;
-    ctx.strokeStyle = col.c2; ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(F.mx(xMin), F.my(d2f(a) + avg * (xMin - a)));
-    ctx.lineTo(F.mx(xMax), F.my(d2f(a) + avg * (xMax - a)));
-    ctx.stroke();
+    function shrinkEps(){ bandsOn = true; epsT = Math.max(0.02, epsT / 2); go(); }
+    function findDel(){ bandsOn = true; delT = findDelta(epsT) * 0.93; go(); }
+    function resetZoom(){
+      zoomOn = false; Zcur = 1; zb = 0;
+      btnZoom.classList.remove("on2");
+      btnZoom.textContent = "확대";
+    }
+    function resetAll(){
+      stopAuto();
+      bandsOn = false;
+      eps = epsT = EPS0; del = delT = DEL0;
+      resetZoom();
+      render(); updateReadout();
+    }
+    p4stop = resetAll;   // 페이지 이탈 시 전체 초기화
 
-    [[a, d2f(a)], [a + h, d2f(a + h)]].forEach(function(p, i){
-      ctx.beginPath(); ctx.arc(F.mx(p[0]), F.my(p[1]), 8, 0, 7);
-      ctx.fillStyle = i === 0 ? col.c1 : col.c2; ctx.fill();
-      ctx.lineWidth = 3; ctx.strokeStyle = col.surface; ctx.stroke();
+    btnEps.addEventListener("click", function(){ stopAuto(); shrinkEps(); });
+    btnDel.addEventListener("click", function(){ stopAuto(); findDel(); });
+    btnZoom.addEventListener("click", function(){
+      if (zoomOn){ resetZoom(); render(); updateReadout(); }
+      else {
+        zoomOn = true; bandsOn = true;
+        btnZoom.classList.add("on2");
+        btnZoom.textContent = "원래대로";
+        go();
+      }
+    });
+    btnReset.addEventListener("click", resetAll);
+
+    var autoActive = false, autoTimers = [];
+    function flash(btn){
+      btn.classList.add("flash");
+      autoTimers.push(setTimeout(function(){ btn.classList.remove("flash"); }, 700));
+    }
+    function startAuto(){
+      autoActive = true;
+      btnAuto.classList.add("on");
+      btnAuto.textContent = "■ 정지";
+      bandsOn = true;
+      eps = epsT = EPS0; del = delT = DEL0;
+      go();
+      var t = 700;
+      for (var round = 0; round < 4; round++){
+        autoTimers.push(setTimeout(function(){ flash(btnEps); shrinkEps(); }, t));
+        t += 1400;
+        autoTimers.push(setTimeout(function(){ flash(btnDel); findDel(); }, t));
+        t += 1800;
+      }
+      autoTimers.push(setTimeout(stopAuto, t + 200));
+    }
+    function stopAuto(){
+      autoActive = false;
+      autoTimers.forEach(clearTimeout);
+      autoTimers = [];
+      btnAuto.classList.remove("on");
+      btnAuto.textContent = "▶ 자동 재생";
+      btnEps.classList.remove("flash");
+      btnDel.classList.remove("flash");
+    }
+    btnAuto.addEventListener("click", function(){
+      if (autoActive) stopAuto();
+      else startAuto();
     });
 
-    document.getElementById("d2aval").textContent = "a = " + a.toFixed(2);
-    document.getElementById("d2hval").textContent = "h = " + (h >= 0.01 ? h.toFixed(3) : h.toFixed(4));
-    var diff = Math.abs(avg - slope);
-    var msg = "평균변화율(할선의 기울기) = <span class='num'>" + avg.toFixed(4) + "</span> &nbsp;·&nbsp; 순간변화율 f′(a) = <span class='num'>" + slope.toFixed(4) + "</span>";
-    if (diff < 0.003) msg += "<br/><b class='good'>두 값이 거의 일치합니다 — 할선이 접선이 되었습니다!</b>";
-    else if (diff < 0.05) msg += "<br/>차이가 <b>" + diff.toFixed(4) + "</b>까지 줄었습니다. h를 더 줄여 보세요.";
-    else msg += "<br/>아직 차이가 " + diff.toFixed(3) + "입니다. h를 왼쪽으로 밀어 보세요.";
-    document.getElementById("d2msg").innerHTML = msg;
-  }
-  d2aS.addEventListener("input", d2render);
-  d2hS.addEventListener("input", d2render);
-
-  /* ================================================= */
-  /* DEMO 3 — Riemann sums                             */
-  /* ================================================= */
-  function d3f(x){ return 0.2*x*x + 0.5; }
-  var EXACT = 0.2 * 64 / 3 + 0.5 * 4;
-  var d3canvas = document.getElementById("d3canvas");
-  var d3ctx = d3canvas.getContext("2d");
-  var d3nS = document.getElementById("d3n");
-  var d3mode = "left";
-
-  function d3render(){
-    var W = d3canvas.width, H = d3canvas.height;
-    var n = parseInt(d3nS.value, 10);
-    var A = 0, B = 4;
-    var F = frame(d3ctx, W, H, -0.3, 4.3, 0, 4.5);
-    var ctx = d3ctx, col = F.col;
-
-    var dx = (B - A) / n, sum = 0;
-    ctx.lineWidth = 1.5;
-    for (var k = 0; k < n; k++){
-      var x0 = A + k * dx;
-      var hgt = d3mode === "left" ? d3f(x0) : d3f(x0 + dx);
-      sum += hgt * dx;
-      var px = F.mx(x0), pw = F.mx(x0 + dx) - px;
-      var py = F.my(hgt), pb = F.my(0);
-      ctx.fillStyle = d3mode === "left" ? "rgba(27,175,122,0.28)" : "rgba(235,104,52,0.26)";
-      ctx.fillRect(px, py, pw, pb - py);
-      if (n <= 60){
-        ctx.strokeStyle = col.surface;
-        ctx.strokeRect(px, py, pw, pb - py);
-      }
-    }
-
-    ctx.lineWidth = 3.5; ctx.strokeStyle = col.c1; ctx.lineJoin = "round";
-    ctx.beginPath();
-    for (var i = 0; i <= 300; i++){
-      var x = -0.3 + 4.6 * i / 300, y = d3f(x);
-      var cx = F.mx(x), cy = F.my(y);
-      if (i === 0) ctx.moveTo(cx, cy); else ctx.lineTo(cx, cy);
-    }
-    ctx.stroke();
-
-    document.getElementById("d3nval").textContent = "n = " + n;
-    var err = sum - EXACT;
-    var msg = "직사각형 넓이의 합 = <span class='num'>" + sum.toFixed(4) + "</span> &nbsp;·&nbsp; 실제 넓이 = <span class='num'>" + EXACT.toFixed(4) + "</span>";
-    if (Math.abs(err) < 0.01) msg += "<br/><b class='good'>오차가 " + Math.abs(err).toFixed(4) + "까지 줄었습니다 — 극한에서는 정확히 일치합니다!</b>";
-    else msg += "<br/>" + (err < 0 ? "아직 <b>" + Math.abs(err).toFixed(3) + "만큼 부족</b>합니다." : "아직 <b>" + err.toFixed(3) + "만큼 초과</b>입니다.") + " n을 키워 보세요.";
-    document.getElementById("d3msg").innerHTML = msg;
-  }
-  d3nS.addEventListener("input", d3render);
-  document.getElementById("d3left").addEventListener("click", function(){
-    d3mode = "left";
-    this.classList.add("active"); document.getElementById("d3right").classList.remove("active");
-    d3render();
-  });
-  document.getElementById("d3right").addEventListener("click", function(){
-    d3mode = "right";
-    this.classList.add("active"); document.getElementById("d3left").classList.remove("active");
-    d3render();
-  });
+    render();
+    updateReadout();
+  })();
 
   /* ========== theme change re-render ========== */
   if (window.matchMedia){
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function(){
-      d1render(); d2render(); d3render();
+      p2render(0);
+      if (window.p3api) window.p3api.render(0);
+      p4render(0);
     });
   }
 
@@ -2067,7 +2314,6 @@
   if (startPage > 1){
     toast("책갈피가 꽂힌 " + startPage + "쪽부터 시작합니다.");
   }
-  d1render(); d2render(); d3render();
 
   /* ========== service worker & update flow ========== */
   if ("serviceWorker" in navigator){
