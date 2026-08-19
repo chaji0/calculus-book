@@ -226,6 +226,50 @@
     .side-btns .mathbtn { flex: 1; }
   }
 
+  /* ---------- p.3 극한 관찰기 입력 UI ---------- */
+  .fxrow {
+    display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .fxlab {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic; font-size: 18px; flex: none;
+    color: var(--text-primary);
+  }
+  #p3fx {
+    flex: 1; min-width: 160px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px; padding: 10px 12px;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    background: var(--surface-1); color: var(--text-primary);
+  }
+  #p3aval {
+    width: 84px; text-align: center;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px; padding: 10px 6px;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    background: var(--surface-1); color: var(--text-primary);
+  }
+  #p3draw {
+    font-family: inherit; font-size: 14px; font-weight: 700;
+    padding: 11px 16px; border-radius: 10px; border: 0;
+    background: var(--accent-deep); color: #fff; cursor: pointer;
+  }
+  .p3presets { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 10px; }
+  .p3presets button {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px; padding: 7px 11px;
+    border-radius: 999px; border: 1px solid var(--border);
+    background: var(--chip-bg); color: var(--text-primary); cursor: pointer;
+  }
+  #p3err { color: var(--status-critical); font-size: 13px; margin: 0 0 8px; display: none; }
+  #p3err.show { display: block; }
+  #p3readout {
+    margin: 8px 0 0; font-size: 13.5px;
+    font-variant-numeric: tabular-nums; color: var(--text-secondary);
+    min-height: 18px;
+  }
+
   .seg { display: flex; gap: 6px; margin-top: 10px; }
   .seg button {
     flex: 1; padding: 8px 6px; border-radius: 8px;
@@ -323,21 +367,21 @@
         </span>
         <span class="pg">p.2</span>
       </button>
-      <button class="toc-card" data-gopage="5" type="button">
+      <button class="toc-card" data-gopage="6" type="button">
         <span class="toc-num" style="background:var(--series-2)">2</span>
         <span>
           <p class="t">미분</p>
           <p class="d">두 점을 잇는 직선을 한없이 가깝게 — 평균변화율이 순간변화율이 되는 순간.</p>
         </span>
-        <span class="pg">p.5</span>
+        <span class="pg">p.6</span>
       </button>
-      <button class="toc-card" data-gopage="8" type="button">
+      <button class="toc-card" data-gopage="9" type="button">
         <span class="toc-num" style="background:var(--series-3)">3</span>
         <span>
           <p class="t">적분</p>
           <p class="d">직사각형을 잘게 쪼갤수록 곡선 아래 넓이에 다가간다 — 구분구적법.</p>
         </span>
-        <span class="pg">p.8</span>
+        <span class="pg">p.9</span>
       </button>
     </div>
     <footer class="appfoot">이 교과서는 선생님이 내용을 고치면 자동으로 새 버전이 배달됩니다.<br/>홈 화면에 추가해 두면 오프라인에서도 열 수 있어요.</footer>
@@ -363,7 +407,46 @@
     </div>
   </section>
 
-  <!-- ═══════════ p.3 : 실험1 ═══════════ -->
+  <!-- ═══════════ p.3 : 함수 극한 관찰기 ═══════════ -->
+  <section class="bookpage" data-title="극한 관찰기" data-demo="p3">
+    <div class="bm-ribbon"></div>
+    <span class="chap-tag">1단원 · 함수의 극한과 연속</span>
+    <h2>극한 관찰기</h2>
+
+    <div class="block demo">
+      <div class="fxrow">
+        <span class="fxlab">f(x) =</span>
+        <input id="p3fx" type="text" value="(x^2-1)/(x-1)" spellcheck="false" autocomplete="off" />
+        <span class="fxlab">a =</span>
+        <input id="p3aval" type="text" value="1" autocomplete="off" />
+        <button id="p3draw" type="button">그리기</button>
+      </div>
+      <div class="p3presets">
+        <button data-f="(x^2-1)/(x-1)" data-a="1" type="button">(x²−1)/(x−1), a=1</button>
+        <button data-f="sin(x)/x" data-a="0" type="button">sin x / x, a=0</button>
+        <button data-f="abs(x)/x" data-a="0" type="button">|x|/x, a=0</button>
+        <button data-f="x^2-2x+3" data-a="2" type="button">x²−2x+3, a=2</button>
+        <button data-f="1/(x-1)^2" data-a="1" type="button">1/(x−1)², a=1</button>
+        <button data-f="1/x" data-a="∞" type="button">1/x, a=∞</button>
+        <button data-f="(2x^2+1)/(x^2)" data-a="∞" type="button">(2x²+1)/x², a=∞</button>
+        <button data-f="1/x" data-a="-∞" type="button">1/x, a=−∞</button>
+      </div>
+      <p id="p3err"></p>
+      <div class="demo-stage">
+        <div class="cwrap">
+          <canvas id="p3canvas" width="1080" height="880"></canvas>
+          <div class="zoombadge" id="p3badge">×1</div>
+        </div>
+        <div class="side-btns">
+          <button class="mathbtn" id="p3limit" type="button"><span class="it">x</span> → <span id="p3aLabel">1</span></button>
+          <button class="mathbtn kr" id="p3zoom" type="button">확대</button>
+        </div>
+      </div>
+      <p id="p3readout"></p>
+    </div>
+  </section>
+
+  <!-- ═══════════ p.4 : (구) 실험1 ═══════════ -->
   <section class="bookpage" data-title="1단원 · 실험" data-demo="d1">
     <div class="bm-ribbon"></div>
     <span class="chap-tag">1단원 · 함수의 극한과 연속</span>
@@ -539,7 +622,7 @@
 (function(){
   "use strict";
 
-  var APP_VERSION = "1.2.0";
+  var APP_VERSION = "1.3.0";
   document.getElementById("verLabel").textContent = "v" + APP_VERSION;
 
   /* ========== storage (책갈피) ========== */
@@ -594,9 +677,11 @@
     nextBtn.disabled = (n === TOTAL);
     window.scrollTo(0, 0);
     refreshBmUI();
-    p2stop(); // 페이지를 떠날 때 p.2 모션 정지·초기화
+    p2stop(); // 페이지를 떠날 때 모션 정지·초기화
+    if (window.p3api) window.p3api.stop();
     var demo = pagesEls[n - 1].getAttribute("data-demo");
     if (demo === "p2") p2render(0);
+    if (demo === "p3" && window.p3api) window.p3api.render(0);
     if (demo === "d1") d1render();
     if (demo === "d2") d2render();
     if (demo === "d3") d3render();
@@ -972,6 +1057,741 @@
     }
     p2go();
   });
+
+  /* ================================================= */
+  /* p.3 — 극한 관찰기 (함수식 입력 + 점·점선 대응)      */
+  /* ================================================= */
+  window.p3api = (function(){
+    var FUNCS = { sin: Math.sin, cos: Math.cos, tan: Math.tan,
+                  asin: Math.asin, acos: Math.acos, atan: Math.atan,
+                  sqrt: Math.sqrt, abs: Math.abs, exp: Math.exp,
+                  ln: Math.log, log: Math.log10 };
+    var NAMES = Object.keys(FUNCS).concat(["pi", "e", "x"]).sort(function(a,b){ return b.length - a.length; });
+
+    function tokenize(src){
+      src = src.replace(/\s+/g, "")
+               .replace(/²/g, "^2").replace(/³/g, "^3")
+               .replace(/π/g, "pi").replace(/−/g, "-")
+               .replace(/×/g, "*").replace(/÷/g, "/")
+               .replace(/√/g, "sqrt");
+      var toks = [], i = 0;
+      while (i < src.length){
+        var ch = src[i];
+        var mNum = /^(\d+\.?\d*|\.\d+)/.exec(src.slice(i));
+        if (mNum){ toks.push({ t: "num", v: parseFloat(mNum[0]) }); i += mNum[0].length; continue; }
+        if (/[a-zA-Z]/.test(ch)){
+          var matched = null;
+          for (var k = 0; k < NAMES.length; k++){
+            if (src.slice(i, i + NAMES[k].length).toLowerCase() === NAMES[k]){ matched = NAMES[k]; break; }
+          }
+          if (!matched) throw new Error("모르는 문자: " + ch);
+          toks.push({ t: "id", v: matched }); i += matched.length; continue;
+        }
+        if ("+-*/^()".indexOf(ch) !== -1){ toks.push({ t: ch }); i++; continue; }
+        throw new Error("모르는 기호: " + ch);
+      }
+      return toks;
+    }
+    function bin(op, a, b){
+      if (op === "+") return function(x){ return a(x) + b(x); };
+      if (op === "-") return function(x){ return a(x) - b(x); };
+      if (op === "*") return function(x){ return a(x) * b(x); };
+      return function(x){ return a(x) / b(x); };
+    }
+    function negf(a){ return function(x){ return -a(x); }; }
+    function powf(a, b){ return function(x){ return Math.pow(a(x), b(x)); }; }
+    function constf(v){ return function(){ return v; }; }
+    function applyf(fn, a){ return function(x){ return fn(a(x)); }; }
+
+    function parseExpr(src){
+      var toks = tokenize(src), pos = 0;
+      function peek(){ return toks[pos]; }
+      function next(){ return toks[pos++]; }
+      function expr(){
+        var f = term();
+        while (peek() && (peek().t === "+" || peek().t === "-")){
+          var op = next().t;
+          f = bin(op, f, term());
+        }
+        return f;
+      }
+      function term(){
+        var f = unary();
+        while (peek()){
+          var p = peek();
+          if (p.t === "*" || p.t === "/"){
+            var op = next().t;
+            f = bin(op, f, unary());
+          } else if (p.t === "num" || p.t === "id" || p.t === "("){
+            f = bin("*", f, unary());
+          } else break;
+        }
+        return f;
+      }
+      function unary(){
+        if (peek() && peek().t === "-"){ next(); return negf(unary()); }
+        return power();
+      }
+      function power(){
+        var base = atom();
+        if (peek() && peek().t === "^"){ next(); return powf(base, unary()); }
+        return base;
+      }
+      function atom(){
+        var p = next();
+        if (!p) throw new Error("식이 갑자기 끝났어요");
+        if (p.t === "num") return constf(p.v);
+        if (p.t === "("){
+          var f = expr();
+          if (!peek() || next().t !== ")") throw new Error("닫는 괄호 )가 빠졌어요");
+          return f;
+        }
+        if (p.t === "id"){
+          if (p.v === "x") return function(x){ return x; };
+          if (p.v === "pi") return constf(Math.PI);
+          if (p.v === "e") return constf(Math.E);
+          var fn = FUNCS[p.v];
+          if (!peek() || next().t !== "(") throw new Error(p.v + " 뒤에는 괄호가 필요해요: " + p.v + "( )");
+          var arg = expr();
+          if (!peek() || next().t !== ")") throw new Error("닫는 괄호 )가 빠졌어요");
+          return applyf(fn, arg);
+        }
+        throw new Error("이 위치에 올 수 없는 기호가 있어요");
+      }
+      var f = expr();
+      if (pos < toks.length) throw new Error("식 끝에 해석할 수 없는 부분이 있어요");
+      return f;
+    }
+    function parseA(str){
+      var s = String(str).trim().toLowerCase().replace(/−/g, "-");
+      var sign = 1;
+      if (s.charAt(0) === "-"){ sign = -1; s = s.slice(1); }
+      else if (s.charAt(0) === "+"){ s = s.slice(1); }
+      var INFS = ["∞", "inf", "infinity", "infinite", "무한", "무한대", "oo"];
+      if (INFS.indexOf(s) !== -1) return { inf: sign };
+      var v = parseFloat(String(str).replace(/−/g, "-"));
+      if (isNaN(v)) return null;
+      return { val: v };
+    }
+
+    var INK = "#111111", PINK = "#e8175d", BLUE = "#2a78d6";
+    function MATHF(px){ return "italic " + px + "px Georgia, 'Times New Roman', serif"; }
+    function NUMF(px){ return px + "px Georgia, 'Times New Roman', serif"; }
+
+    var cv = document.getElementById("p3canvas");
+    var ctx = cv.getContext("2d");
+    var W = cv.width, H = cv.height;
+    var badge = document.getElementById("p3badge");
+
+    var F = null, A = 1, AInf = 0;
+    var Lm = null, Lp = null, Linf = null, Lc = 0;
+    var view = { xMin: -4, xMax: 4, yMin: -1, yMax: 5 };
+    var arrowsOn = false, arrowT0 = null;
+    var ARROW_MS = 2600;
+    var zoomOn = false, logZ = 0, centerEase = 0;
+    var ZOOM_RATE = 1 / 1400, LOGZ_MAX = 10;
+
+    function fEval(x){
+      try {
+        var v = F(x);
+        return (typeof v === "number" && isFinite(v)) ? v : NaN;
+      } catch(e){ return NaN; }
+    }
+    function estimateLimits(){
+      Lm = Lp = Linf = null;
+      if (AInf !== 0){
+        var v2 = fEval(AInf * 1e6), v3 = fEval(AInf * 1e7);
+        if (!isNaN(v2) && !isNaN(v3) && Math.abs(v3) < 1e7 && Math.abs(v3 - v2) < Math.max(1e-3, Math.abs(v3) * 0.01)){
+          Linf = v3;
+        }
+        Lc = Linf !== null ? Linf : 0;
+        return;
+      }
+      function side(sign){
+        var hs = [1e-6, 1e-5, 1e-4];
+        for (var i = 0; i < hs.length; i++){
+          var v = fEval(A + sign * hs[i]);
+          if (!isNaN(v)){
+            if (Math.abs(v) > 1e7) return null;
+            return v;
+          }
+        }
+        return null;
+      }
+      Lm = side(-1); Lp = side(1);
+      if (Lm !== null && Lp !== null) Lc = (Lm + Lp) / 2;
+      else if (Lm !== null) Lc = Lm;
+      else if (Lp !== null) Lc = Lp;
+      else Lc = 0;
+    }
+    function autoView(){
+      if (AInf !== 0){
+        if (AInf > 0){ view.xMin = -3; view.xMax = 13; }
+        else { view.xMin = -13; view.xMax = 3; }
+      } else {
+        view.xMin = A - 4.2; view.xMax = A + 4.2;
+      }
+      var vals = [];
+      for (var i = 0; i <= 700; i++){
+        var x = view.xMin + (view.xMax - view.xMin) * i / 700;
+        var y = fEval(x);
+        if (!isNaN(y)) vals.push(y);
+      }
+      if (!vals.length){ view.yMin = -4; view.yMax = 4; return; }
+      vals.sort(function(a,b){ return a - b; });
+      var lo = vals[Math.floor(vals.length * 0.06)];
+      var hi = vals[Math.floor(vals.length * 0.94)];
+      [Lm, Lp, Linf].forEach(function(L){
+        if (L !== null){ lo = Math.min(lo, L); hi = Math.max(hi, L); }
+      });
+      lo = Math.min(lo, 0); hi = Math.max(hi, 0);
+      var pad = Math.max((hi - lo) * 0.18, 0.8);
+      lo -= pad; hi += pad;
+      if (hi - lo > 22){
+        var c = Lc;
+        lo = Math.max(lo, c - 11); hi = Math.min(hi, c + 11);
+        lo = Math.min(lo, 0); hi = Math.max(hi, 0);
+      }
+      view.yMin = lo; view.yMax = hi;
+    }
+
+    var SUP = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
+    function sup(n){ return String(n).split("").map(function(c){ return SUP[c] || c; }).join(""); }
+    function fmtShort(v){
+      if (Math.abs(v - Math.round(v)) < 1e-9) return String(Math.round(v));
+      return v.toFixed(3).replace(/0+$/, "").replace(/\.$/, "");
+    }
+    function fmtBig(v){
+      var av = Math.abs(v);
+      if (av < 100000) return Math.round(v).toLocaleString("ko-KR");
+      var e = Math.floor(Math.log10(av));
+      var m = v / Math.pow(10, e);
+      var ms = Math.abs(Math.abs(m) - 1) < 0.05 ? (m < 0 ? "-" : "") : m.toFixed(1) + "×";
+      return ms + "10" + sup(e);
+    }
+    function fmtZoomP3(z){
+      if (z < 1.05) return "×1";
+      if (z < 10) return "×" + z.toFixed(1);
+      if (z < 10000) return "×" + Math.round(z).toLocaleString("ko-KR");
+      var units = [[1e8, "억"], [1e4, "만"]];
+      for (var i = 0; i < units.length; i++){
+        if (z >= units[i][0]){
+          var val = z / units[i][0];
+          return "×" + (val < 10 ? val.toFixed(1) : Math.round(val).toLocaleString("ko-KR")) + units[i][1];
+        }
+      }
+      return "×" + Math.round(z);
+    }
+    function fmtApproachP3(base, delta, positive){
+      var v = positive ? base + delta : base - delta;
+      var d = Math.max(2, Math.min(13, Math.ceil(-Math.log10(delta)) + 2));
+      return v.toFixed(d);
+    }
+
+    function head(x, y, dx, dy){
+      var L = 16, Wd = 6.5;
+      var n = Math.hypot(dx, dy); dx /= n; dy /= n;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x - dx*L - dy*Wd, y - dy*L + dx*Wd);
+      ctx.lineTo(x - dx*L + dy*Wd, y - dy*L - dx*Wd);
+      ctx.closePath();
+      ctx.fillStyle = INK; ctx.fill();
+    }
+    function redDot(x, y){
+      if (x < -40 || x > W + 40 || y < -40 || y > H + 40) return;
+      ctx.beginPath(); ctx.arc(x, y, 8, 0, 7);
+      ctx.fillStyle = PINK; ctx.fill();
+      ctx.lineWidth = 2.5; ctx.strokeStyle = "#ffffff"; ctx.stroke();
+    }
+    function blueDot(x, y){
+      if (x < -40 || x > W + 40 || y < -40 || y > H + 40) return;
+      ctx.beginPath(); ctx.arc(x, y, 8.5, 0, 7);
+      ctx.fillStyle = BLUE; ctx.fill();
+      ctx.lineWidth = 2.5; ctx.strokeStyle = "#ffffff"; ctx.stroke();
+    }
+    function redDash(x1, y1, x2, y2){
+      ctx.save();
+      ctx.setLineDash([7, 6]);
+      ctx.strokeStyle = PINK; ctx.lineWidth = 2.6;
+      ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+      ctx.restore();
+    }
+    function halo(text, x, y){
+      ctx.save();
+      ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 7; ctx.lineJoin = "round";
+      ctx.strokeText(text, x, y);
+      ctx.fillStyle = INK; ctx.fillText(text, x, y);
+      ctx.restore();
+    }
+    function niceStep(range, target){
+      var raw = range / target;
+      var mag = Math.pow(10, Math.floor(Math.log10(raw)));
+      var r = raw / mag;
+      return (r < 1.5 ? 1 : r < 3.5 ? 2 : r < 7.5 ? 5 : 10) * mag;
+    }
+    function arrowProgress(now){
+      if (arrowT0 === null) return 1;
+      var p = Math.min(1, (now - arrowT0) / ARROW_MS);
+      return 1 - Math.pow(1 - p, 3);
+    }
+
+    function renderFinite(now){
+      var ease = centerEase * centerEase * (3 - 2 * centerEase);
+      var Z = Math.pow(10, logZ);
+      var vw = view.xMax - view.xMin, vh = view.yMax - view.yMin;
+      var sX = (W / vw) * Z, sY = (H / vh) * Z;
+      var cx0 = (view.xMin + view.xMax) / 2, cy0 = (view.yMin + view.yMax) / 2;
+      var cx = cx0 + (A - cx0) * ease;
+      var cy = cy0 + (Lc - cy0) * ease;
+      function sx(x){ return W/2 + (x - cx) * sX; }
+      function sy(y){ return H/2 - (y - cy) * sY; }
+      function ixf(px){ return cx + (px - W/2) / sX; }
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, H);
+
+      var axisY = sy(0), axisX = sx(0);
+      var xVis = axisY > -60 && axisY < H + 60;
+      var yVis = axisX > -60 && axisX < W + 60;
+
+      if (xVis){
+        ctx.strokeStyle = INK; ctx.lineWidth = 3.5;
+        ctx.beginPath(); ctx.moveTo(14, axisY); ctx.lineTo(W - 20, axisY); ctx.stroke();
+        head(W - 14, axisY, 1, 0);
+        ctx.font = MATHF(32); ctx.fillStyle = INK;
+        ctx.textAlign = "center"; ctx.textBaseline = "top";
+        ctx.fillText("x", W - 30, Math.min(axisY + 12, H - 40));
+        if (logZ < 0.2){
+          ctx.font = NUMF(26);
+          var step = niceStep(vw, 8);
+          for (var t = Math.ceil(ixf(30) / step) * step; t <= ixf(W - 50); t += step){
+            if (Math.abs(t) < step * 1e-6) continue;
+            var px = sx(t);
+            ctx.beginPath(); ctx.moveTo(px, axisY - 6); ctx.lineTo(px, axisY + 6);
+            ctx.lineWidth = 2; ctx.stroke();
+            ctx.fillText(fmtShort(t), px, axisY + 12);
+          }
+        }
+      }
+      if (yVis){
+        ctx.strokeStyle = INK; ctx.lineWidth = 3.5;
+        ctx.beginPath(); ctx.moveTo(axisX, H - 14); ctx.lineTo(axisX, 26); ctx.stroke();
+        head(axisX, 20, 0, -1);
+        ctx.font = MATHF(32); ctx.fillStyle = INK;
+        ctx.textAlign = "right"; ctx.textBaseline = "bottom";
+        ctx.fillText("y", axisX - 12, 40);
+      }
+      if (xVis && yVis){
+        ctx.font = MATHF(28); ctx.fillStyle = INK;
+        ctx.textAlign = "right"; ctx.textBaseline = "top";
+        ctx.fillText("O", axisX - 8, axisY + 10);
+      }
+
+      ctx.strokeStyle = INK; ctx.lineWidth = 4;
+      ctx.lineJoin = "round"; ctx.lineCap = "round";
+      var N = 900, prevOk = false, prevPy = 0;
+      ctx.beginPath();
+      for (var i = 0; i <= N; i++){
+        var px2 = -20 + (W + 40) * i / N;
+        var y = fEval(ixf(px2));
+        if (isNaN(y)){ prevOk = false; continue; }
+        var py = sy(y);
+        if (py < -H || py > 2 * H){ prevOk = false; continue; }
+        if (prevOk && Math.abs(py - prevPy) > H * 0.9) prevOk = false;
+        if (!prevOk){ ctx.moveTo(px2, py); prevOk = true; }
+        else ctx.lineTo(px2, py);
+        prevPy = py;
+      }
+      ctx.stroke();
+
+      var fa = fEval(A);
+      var jump = (Lm !== null && Lp !== null && Math.abs(Lm - Lp) > 1e-4);
+      var single = (Lm !== null && Lp !== null && !jump);
+      var dotXs = sx(A);
+
+      if (single){
+        var dy0 = sy(Lc);
+        ctx.save();
+        ctx.setLineDash([9, 8]);
+        ctx.strokeStyle = INK; ctx.lineWidth = 2.2;
+        ctx.beginPath(); ctx.moveTo(dotXs, dy0); ctx.lineTo(dotXs, xVis ? axisY : H); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(dotXs, dy0); ctx.lineTo(yVis ? axisX : 0, dy0); ctx.stroke();
+        ctx.restore();
+        if (xVis){
+          ctx.font = NUMF(28); ctx.fillStyle = INK;
+          ctx.textAlign = "center"; ctx.textBaseline = "top";
+          halo(fmtShort(A), dotXs, axisY + 12);
+        }
+        if (yVis){
+          ctx.font = NUMF(28);
+          ctx.textAlign = "right"; ctx.textBaseline = "middle";
+          halo(fmtShort(Lc), axisX - 12, sy(Lc));
+        }
+      }
+
+      function circle(y, filled){
+        var py = sy(y);
+        if (py < -30 || py > H + 30) return;
+        ctx.beginPath(); ctx.arc(dotXs, py, 8, 0, 7);
+        if (filled){ ctx.fillStyle = INK; ctx.fill(); }
+        else {
+          ctx.fillStyle = "#ffffff"; ctx.fill();
+          ctx.lineWidth = 3; ctx.strokeStyle = INK; ctx.stroke();
+        }
+      }
+      if (!isNaN(fa)) circle(fa, true);
+      if (isNaN(fa) && single) circle(Lc, false);
+      if (jump){
+        if (Lm !== null) circle(Lm, !isNaN(fa) && Math.abs(fa - Lm) < 1e-9);
+        if (Lp !== null) circle(Lp, !isNaN(fa) && Math.abs(fa - Lp) < 1e-9);
+      }
+
+      var numAlpha = Math.max(0, Math.min(1, (logZ - 0.3) / 0.35)) * ease;
+      if (numAlpha > 0.01){
+        var OFF = 0.315;
+        var wX = (OFF * W) / sX, wY = (OFF * H) / sY;
+        ctx.save();
+        ctx.globalAlpha = numAlpha;
+        var rowY = H - 64;
+        ctx.font = NUMF(26);
+        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        halo(fmtApproachP3(A, wX, false), dotXs - OFF * W, rowY);
+        halo(fmtApproachP3(A, wX, true),  dotXs + OFF * W, rowY);
+        ctx.font = "bold " + NUMF(29);
+        halo(fmtShort(A), dotXs, rowY);
+        ctx.strokeStyle = INK; ctx.lineWidth = 2;
+        [dotXs - OFF * W, dotXs + OFF * W].forEach(function(px3){
+          ctx.beginPath(); ctx.moveTo(px3, rowY + 20); ctx.lineTo(px3, rowY + 34); ctx.stroke();
+        });
+        var colX = 24;
+        ctx.font = NUMF(26);
+        ctx.textAlign = "left";
+        halo(fmtApproachP3(Lc, wY, true),  colX, sy(Lc) - OFF * H);
+        halo(fmtApproachP3(Lc, wY, false), colX, sy(Lc) + OFF * H);
+        if (single){
+          ctx.font = "bold " + NUMF(29);
+          halo(fmtShort(Lc), colX, sy(Lc));
+        }
+        ctx.restore();
+      }
+
+      // 점·점선 대응 (a±1 근방에서 출발, 다가가서 정지)
+      if (arrowsOn){
+        var prog = arrowProgress(now);
+        var startPix = Math.min(1.0 * sX, 0.4 * W);
+        var endGap = 10;
+        var dPixX = endGap + (startPix - endGap) * (1 - prog);
+        var ayLine = xVis ? axisY : H - 6;
+        var axLine = yVis ? axisX : 6;
+
+        function tracer(sign){
+          var dw = dPixX / sX;
+          var xt = A + sign * dw;
+          var yt = fEval(xt);
+          if (isNaN(yt)) return;
+          var px = sx(xt), py = sy(yt);
+          if (py < -60 || py > H + 60){
+            redDash(px, ayLine, px, py < 0 ? -40 : H + 40);
+            redDot(px, ayLine);
+            return;
+          }
+          redDash(px, ayLine, px, py);
+          redDash(px, py, axLine, py);
+          redDot(px, ayLine);
+          redDot(px, py);
+          blueDot(axLine, py);
+        }
+        tracer(1);
+        tracer(-1);
+      }
+
+      if (logZ > 0.01){
+        badge.classList.add("show");
+        badge.innerHTML = fmtZoomP3(Z) + (logZ >= LOGZ_MAX ? " (최대)" : "");
+      } else badge.classList.remove("show");
+    }
+
+    function renderInf(now){
+      var travel = logZ;
+      var baseC = AInf > 0 ? 5 : -5;
+      var xc = baseC * Math.pow(10, travel);
+      var halfW0 = (view.xMax - view.xMin) / 2;
+      var halfW = travel < 0.01 ? halfW0 : Math.abs(xc) * 0.8;
+      var xMin = (travel < 0.01) ? view.xMin : xc - halfW;
+      var xMax = (travel < 0.01) ? view.xMax : xc + halfW;
+      var yMin, yMax;
+      if (travel < 0.01){
+        yMin = view.yMin; yMax = view.yMax;
+      } else {
+        var lo = Infinity, hi = -Infinity;
+        for (var i = 0; i <= 300; i++){
+          var xx = xMin + (xMax - xMin) * i / 300;
+          var yy = fEval(xx);
+          if (!isNaN(yy)){ if (yy < lo) lo = yy; if (yy > hi) hi = yy; }
+        }
+        if (!isFinite(lo)){ lo = -1; hi = 1; }
+        var c = Linf !== null ? Linf : (lo + hi) / 2;
+        var half = Math.max(Math.abs(hi - c), Math.abs(c - lo), 1e-12) * 1.6;
+        var h0 = (view.yMax - view.yMin) / 2;
+        half = h0 + (half - h0) * Math.min(1, travel / 0.8);
+        var c0 = (view.yMin + view.yMax) / 2;
+        var cc = c0 + (c - c0) * Math.min(1, travel / 0.8);
+        yMin = cc - half; yMax = cc + half;
+      }
+      var sX = W / (xMax - xMin), sY = H / (yMax - yMin);
+      function sx(x){ return (x - xMin) * sX; }
+      function sy(y){ return H - (y - yMin) * sY; }
+      function ixf(px){ return xMin + px / sX; }
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, W, H);
+
+      var axisY = sy(0), axisX = sx(0);
+      var xVis = axisY > -60 && axisY < H + 60;
+      var yVis = axisX > -60 && axisX < W + 60;
+
+      if (xVis){
+        ctx.strokeStyle = INK; ctx.lineWidth = 3.5;
+        ctx.beginPath(); ctx.moveTo(14, axisY); ctx.lineTo(W - 20, axisY); ctx.stroke();
+        if (AInf > 0) head(W - 14, axisY, 1, 0); else head(20, axisY, -1, 0);
+        ctx.font = MATHF(32); ctx.fillStyle = INK;
+        ctx.textAlign = "center"; ctx.textBaseline = "top";
+        ctx.fillText("x", AInf > 0 ? W - 30 : 44, Math.min(axisY + 12, H - 40));
+        if (travel < 0.01){
+          ctx.font = NUMF(26);
+          var step = niceStep(xMax - xMin, 8);
+          for (var t = Math.ceil(ixf(30) / step) * step; t <= ixf(W - 50); t += step){
+            if (Math.abs(t) < step * 1e-6) continue;
+            var px = sx(t);
+            ctx.beginPath(); ctx.moveTo(px, axisY - 6); ctx.lineTo(px, axisY + 6);
+            ctx.lineWidth = 2; ctx.stroke();
+            ctx.fillText(fmtShort(t), px, axisY + 12);
+          }
+        }
+      }
+      if (yVis){
+        ctx.strokeStyle = INK; ctx.lineWidth = 3.5;
+        ctx.beginPath(); ctx.moveTo(axisX, H - 14); ctx.lineTo(axisX, 26); ctx.stroke();
+        head(axisX, 20, 0, -1);
+        ctx.font = MATHF(32); ctx.fillStyle = INK;
+        ctx.textAlign = "right"; ctx.textBaseline = "bottom";
+        ctx.fillText("y", axisX - 12, 40);
+      }
+      if (xVis && yVis){
+        ctx.font = MATHF(28); ctx.fillStyle = INK;
+        ctx.textAlign = "right"; ctx.textBaseline = "top";
+        ctx.fillText("O", axisX - 8, axisY + 10);
+      }
+
+      if (Linf !== null){
+        var pyL = sy(Linf);
+        ctx.save();
+        ctx.setLineDash([9, 8]);
+        ctx.strokeStyle = INK; ctx.lineWidth = 2.2;
+        ctx.beginPath(); ctx.moveTo(0, pyL); ctx.lineTo(W, pyL); ctx.stroke();
+        ctx.restore();
+        var collidesAxis = xVis && Math.abs(pyL - axisY) < 26;
+        if (!collidesAxis){
+          ctx.font = NUMF(28); ctx.fillStyle = INK;
+          ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+          halo(fmtShort(Linf), (yVis ? axisX : 0) + 14, pyL - 8);
+        }
+      }
+
+      ctx.strokeStyle = INK; ctx.lineWidth = 4;
+      ctx.lineJoin = "round"; ctx.lineCap = "round";
+      var N = 900, prevOk = false, prevPy = 0;
+      ctx.beginPath();
+      for (var i2 = 0; i2 <= N; i2++){
+        var px2 = -20 + (W + 40) * i2 / N;
+        var y = fEval(ixf(px2));
+        if (isNaN(y)){ prevOk = false; continue; }
+        var py = sy(y);
+        if (py < -H || py > 2 * H){ prevOk = false; continue; }
+        if (prevOk && Math.abs(py - prevPy) > H * 0.9) prevOk = false;
+        if (!prevOk){ ctx.moveTo(px2, py); prevOk = true; }
+        else ctx.lineTo(px2, py);
+        prevPy = py;
+      }
+      ctx.stroke();
+
+      if (travel > 0.15){
+        var alpha2 = Math.min(1, (travel - 0.15) / 0.3);
+        ctx.save();
+        ctx.globalAlpha = alpha2;
+        var rowY = H - 64;
+        ctx.font = NUMF(26);
+        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        [0.2, 0.5, 0.8].forEach(function(fr){
+          var xv = xMin + (xMax - xMin) * fr;
+          var px4 = W * fr;
+          halo(fmtBig(xv), px4, rowY);
+          ctx.strokeStyle = INK; ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.moveTo(px4, rowY + 20); ctx.lineTo(px4, rowY + 34); ctx.stroke();
+        });
+        if (Linf !== null){
+          var wY = (0.315 * H) / sY;
+          var colX = 24;
+          ctx.font = NUMF(26);
+          ctx.textAlign = "left";
+          halo(fmtApproachP3(Linf, wY, true),  colX, sy(Linf) - 0.315 * H);
+          halo(fmtApproachP3(Linf, wY, false), colX, sy(Linf) + 0.315 * H);
+          ctx.font = "bold " + NUMF(29);
+          halo(fmtShort(Linf), colX, sy(Linf));
+        }
+        ctx.restore();
+      }
+
+      if (arrowsOn){
+        var prog = arrowProgress(now);
+        var edgeX = AInf > 0 ? W - 60 : 60;
+        var startX = W / 2 + (AInf > 0 ? -0.18 * W : 0.18 * W);
+        var tipX = startX + (edgeX - startX) * prog;
+        var ayLine = xVis ? axisY : H - 6;
+        var axLine = yVis ? axisX : 6;
+        var xw = ixf(tipX);
+        var yw = fEval(xw);
+        if (!isNaN(yw)){
+          var py3 = sy(yw);
+          if (py3 > -60 && py3 < H + 60){
+            redDash(tipX, ayLine, tipX, py3);
+            redDash(tipX, py3, axLine, py3);
+            redDot(tipX, ayLine);
+            redDot(tipX, py3);
+            blueDot(axLine, py3);
+          } else {
+            redDash(tipX, ayLine, tipX, py3 < 0 ? -40 : H + 40);
+            redDot(tipX, ayLine);
+          }
+        } else {
+          redDot(tipX, ayLine);
+        }
+      }
+
+      if (travel > 0.01){
+        badge.classList.add("show");
+        badge.innerHTML = "x ≈ " + fmtBig(xc) + (travel >= LOGZ_MAX ? " (최대)" : "");
+      } else badge.classList.remove("show");
+    }
+
+    function render(now){
+      if (!F) return;
+      if (AInf !== 0) renderInf(now);
+      else renderFinite(now);
+    }
+
+    var running = false, lastT = null;
+    function animActive(now){
+      var arrowsAnimating = arrowsOn && arrowT0 !== null && (now - arrowT0) < ARROW_MS + 100;
+      return arrowsAnimating || zoomOn;
+    }
+    function loop(now){
+      if (lastT === null) lastT = now;
+      var dt = Math.min(now - lastT, 100);
+      lastT = now;
+      if (zoomOn){
+        if (centerEase < 1) centerEase = Math.min(1, centerEase + dt / 1000);
+        logZ = Math.min(LOGZ_MAX, logZ + ZOOM_RATE * dt);
+      }
+      render(now);
+      if (animActive(now)) requestAnimationFrame(loop);
+      else { running = false; lastT = null; }
+    }
+    function go(){
+      if (!running){ running = true; lastT = null; requestAnimationFrame(loop); }
+    }
+
+    var btnLimit = document.getElementById("p3limit");
+    var btnZoom = document.getElementById("p3zoom");
+    var errEl = document.getElementById("p3err");
+    var readout = document.getElementById("p3readout");
+
+    function resetMotion(){
+      arrowsOn = false; arrowT0 = null;
+      zoomOn = false; logZ = 0; centerEase = 0;
+      btnLimit.classList.remove("on");
+      btnZoom.classList.remove("on2");
+      btnZoom.textContent = "확대";
+    }
+
+    function apply(){
+      errEl.classList.remove("show");
+      var src = document.getElementById("p3fx").value;
+      var aParsed = parseA(document.getElementById("p3aval").value);
+      if (aParsed === null){
+        errEl.textContent = "a에는 숫자 또는 ∞, -∞ 를 입력해 주세요.";
+        errEl.classList.add("show"); return;
+      }
+      var fn;
+      try { fn = parseExpr(src); fn(1.2345); fn(-0.777); }
+      catch(e){
+        errEl.textContent = "식을 이해하지 못했어요 — " + e.message;
+        errEl.classList.add("show"); return;
+      }
+      F = fn;
+      if (aParsed.inf){ AInf = aParsed.inf; A = 0; }
+      else { AInf = 0; A = aParsed.val; }
+      resetMotion();
+      estimateLimits();
+      autoView();
+      document.getElementById("p3aLabel").textContent =
+        AInf > 0 ? "∞" : AInf < 0 ? "−∞" : fmtShort(A);
+      var ro = [];
+      if (AInf !== 0){
+        ro.push("x→" + (AInf > 0 ? "∞" : "−∞") + " 극한 " + (Linf === null ? "발산/없음" : "≈ " + fmtShort(Linf)));
+      } else {
+        ro.push("좌극한 " + (Lm === null ? "발산/없음" : "≈ " + fmtShort(Lm)));
+        ro.push("우극한 " + (Lp === null ? "발산/없음" : "≈ " + fmtShort(Lp)));
+      }
+      readout.textContent = ro.join("  ·  ");
+      render(0);
+    }
+
+    document.getElementById("p3draw").addEventListener("click", apply);
+    document.getElementById("p3fx").addEventListener("keydown", function(e){ if (e.key === "Enter") apply(); });
+    document.getElementById("p3aval").addEventListener("keydown", function(e){ if (e.key === "Enter") apply(); });
+    document.querySelectorAll(".p3presets button").forEach(function(b){
+      b.addEventListener("click", function(){
+        document.getElementById("p3fx").value = b.getAttribute("data-f");
+        document.getElementById("p3aval").value = b.getAttribute("data-a");
+        apply();
+      });
+    });
+    btnLimit.addEventListener("click", function(){
+      if (!F) return;
+      if (arrowsOn){
+        arrowsOn = false; arrowT0 = null;
+        btnLimit.classList.remove("on");
+        render(performance.now());
+      } else {
+        arrowsOn = true; arrowT0 = performance.now();
+        btnLimit.classList.add("on");
+        go();
+      }
+    });
+    btnZoom.addEventListener("click", function(){
+      if (!F) return;
+      zoomOn = !zoomOn;
+      btnZoom.classList.toggle("on2", zoomOn);
+      btnZoom.textContent = zoomOn ? "원래대로" : "확대";
+      if (!zoomOn){
+        logZ = 0; centerEase = 0;
+        render(performance.now());
+      }
+      go();
+    });
+
+    apply(); // 초기 함수 그리기
+
+    return {
+      render: render,
+      stop: function(){
+        resetMotion();
+        if (F) render(0);
+      }
+    };
+  })();
 
   /* ================================================= */
   /* DEMO 1 — discontinuity zoom                       */

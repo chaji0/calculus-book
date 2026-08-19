@@ -3,7 +3,7 @@
  * ★ 교과서 내용을 수정해서 새로 올릴 때는 아래 VERSION 숫자를 반드시 하나 올려 주세요.
  *   (예: v1.0.0 → v1.0.1)  이 숫자가 바뀌어야 학생들의 앱이 새 버전을 받아옵니다.
  */
-var VERSION = "v1.0.1";
+var VERSION = "v1.0.2";
 
 var CACHE = "moving-calc-" + VERSION;
 var ASSETS = [
