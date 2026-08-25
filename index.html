@@ -301,6 +301,81 @@
   #p4readout .ok { color: var(--status-good); font-weight: 700; }
   #p4readout .bad { color: var(--status-critical); font-weight: 700; }
 
+
+  /* ---------- p.5 극한의 성질 활동 ---------- */
+  .p5q{font-size:14px;color:var(--text-secondary);line-height:1.6;margin:0 0 14px;}
+  .p5q i{font-family:Georgia,serif;}
+  .p5propToggle{font-family:inherit;font-size:13px;font-weight:700;color:var(--accent-deep);
+    background:none;border:1px dashed var(--border);border-radius:999px;padding:7px 14px;cursor:pointer;}
+  #p5propBox{display:none;margin-top:10px;padding:14px 16px;background:var(--chip-bg);border-radius:12px;
+    font-family:Georgia,"Times New Roman",serif;font-size:14.5px;line-height:2.1;}
+  #p5propBox.show{display:block;}
+  #p5propBox .hd{font-size:13.5px;color:var(--text-secondary);margin-bottom:8px;line-height:1.6;
+    padding-bottom:8px;border-bottom:1px solid var(--border);}
+  #p5propBox sub{font-size:.62em;}
+  #p5propBox b{color:var(--accent-deep);font-family:system-ui,sans-serif;font-size:12.5px;margin-right:4px;}
+
+  .p5fnrow{display:flex;gap:12px;}
+  @media (max-width:640px){ .p5fnrow{flex-direction:column;} }
+  .p5fnpanel{flex:1;min-width:0;border:1px solid var(--border);border-radius:12px;padding:13px;background:var(--surface-1);}
+  .p5fnhead{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+  .p5fnname{font-family:Georgia,serif;font-style:italic;font-size:19px;font-weight:600;}
+  .p5fnname.f{color:var(--series-1);} .p5fnname.g{color:var(--series-2);}
+  .p5tabs{display:flex;gap:5px;margin-left:auto;}
+  .p5tabs button{font-family:inherit;font-size:11.5px;padding:6px 10px;border-radius:8px;
+    border:1px solid var(--border);background:transparent;color:var(--text-secondary);cursor:pointer;}
+  .p5tabs button.on{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff;font-weight:700;}
+  .p5exp{width:100%;font-family:Georgia,"Times New Roman",serif;font-size:16px;padding:9px 11px;
+    border:1.5px solid var(--border);border-radius:9px;background:var(--page);color:var(--text-primary);}
+  .p5pw{display:none;}
+  .p5pw.show{display:block;}
+  .p5pwline{display:flex;align-items:center;gap:7px;margin-bottom:7px;}
+  .p5pwcond{font-family:Georgia,serif;font-size:14px;color:var(--text-secondary);white-space:nowrap;flex:none;}
+  .p5brk{width:52px;text-align:center;font-family:Georgia,serif;font-size:14px;padding:6px 4px;
+    border:1.5px solid var(--border);border-radius:8px;background:var(--page);color:var(--text-primary);}
+  .p5ctrls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px;}
+  .p5ops{display:flex;gap:6px;}
+  .p5ops button{font-family:Georgia,serif;font-size:15px;padding:9px 14px;border-radius:9px;
+    border:1.5px solid var(--border);background:var(--surface-1);color:var(--text-primary);cursor:pointer;}
+  .p5ops button.on{background:var(--series-3);border-color:var(--series-3);color:#fff;font-weight:700;}
+  .p5alab{font-family:Georgia,serif;font-style:italic;font-size:15px;color:var(--text-secondary);}
+  .p5aval{width:58px;text-align:center;font-family:Georgia,serif;font-size:15px;padding:8px 4px;
+    border:1.5px solid var(--border);border-radius:8px;background:var(--page);color:var(--text-primary);}
+  .p5go{font-family:inherit;font-size:14px;font-weight:700;padding:10px 18px;border-radius:9px;border:0;
+    background:var(--accent-deep);color:#fff;cursor:pointer;}
+  .p5hintbtn{font-family:inherit;font-size:13px;font-weight:600;padding:9px 14px;border-radius:9px;
+    border:1px solid var(--border);background:var(--chip-bg);color:var(--text-primary);cursor:pointer;}
+  #p5err{color:var(--status-critical);font-size:13px;margin:9px 0 0;display:none;}
+  #p5err.show{display:block;}
+  #p5hintBox{display:none;margin-top:10px;padding:12px 14px;border-radius:11px;
+    background:var(--chip-bg);border:1px dashed var(--border);font-size:13.5px;line-height:1.85;}
+  #p5hintBox.show{display:block;}
+  #p5hintBox .ex{font-family:Georgia,"Times New Roman",serif;font-size:14.5px;}
+  #p5hintBox button{margin-top:8px;font-family:inherit;font-size:12.5px;font-weight:700;
+    padding:7px 12px;border-radius:8px;border:1px solid var(--border);
+    background:var(--surface-1);color:var(--accent-deep);cursor:pointer;}
+  .p5graphs{display:flex;gap:12px;align-items:flex-start;}
+  .p5graphs canvas{display:block;width:100%;height:auto;border-radius:10px;
+    border:1px solid var(--border);background:#fff;}
+  .p5colS{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px;}
+  .p5colB{flex:2;min-width:0;}
+  @media (max-width:760px){
+    .p5graphs{flex-direction:column;}
+    .p5colS{flex-direction:row;width:100%;}
+    .p5colB{width:100%;}
+  }
+  .p5note{margin-top:9px;font-size:12.5px;color:var(--text-muted);}
+  .p5tbl{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px;font-variant-numeric:tabular-nums;}
+  .p5tbl th,.p5tbl td{padding:9px 8px;text-align:center;border-bottom:1px solid var(--border);}
+  .p5tbl th{font-size:12px;color:var(--text-muted);font-weight:700;}
+  .p5tbl td.nm{font-family:Georgia,serif;font-style:italic;font-size:15px;text-align:left;font-weight:600;}
+  .p5tbl td.no{color:var(--status-critical);font-weight:700;}
+  .p5tbl td.yes{color:var(--status-good);font-weight:700;}
+  #p5verdict{margin-top:12px;font-size:14.5px;line-height:1.7;font-family:Georgia,"Times New Roman",serif;
+    font-style:italic;color:var(--text-secondary);min-height:22px;}
+  #p5verdict .hit{color:var(--status-good);font-weight:700;font-style:normal;}
+  #p5verdict .miss{color:var(--text-primary);font-weight:700;font-style:normal;}
+
   .seg { display: flex; gap: 6px; margin-top: 10px; }
   .seg button {
     flex: 1; padding: 8px 6px; border-radius: 8px;
@@ -458,6 +533,46 @@
 </head>
 <body>
 
+<!-- ═══════════ 로딩(스플래시) 화면 ═══════════ -->
+<div id="splash">
+  <div id="splashMark">∫</div>
+  <img id="splashEmblem" alt="" src="data:image/png;base64,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">
+  <div id="splashTitle">CALCULUS</div>
+  <div id="splashLine"></div>
+  <div id="splashSub">v1.8&ensp;·&ensp;제작 차지영선생님</div>
+  <!-- ★ 로딩화면의 버전 표기는 선생님이 바꿔 달라고 할 때만 수정 -->
+</div>
+<style>
+  #splash {
+    position:fixed; inset:0; z-index:3000; overflow:hidden;
+    background:radial-gradient(120% 90% at 50% 30%, #1b3a6b 0%, #14294c 48%, #0a1730 100%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transition:opacity .55s ease;
+    font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  }
+  #splash.hide { opacity:0; pointer-events:none; }
+  #splashMark {
+    position:absolute; left:50%; top:47%; transform:translate(-50%,-50%);
+    font-family:Georgia,'Times New Roman',serif; font-style:italic;
+    font-size:68vmin; line-height:1; color:rgba(255,255,255,.055);
+    user-select:none; pointer-events:none;
+  }
+  #splashEmblem { position:relative; width:118px; height:118px; filter:drop-shadow(0 6px 18px rgba(0,0,0,.45)); }
+  #splashTitle {
+    position:relative; margin-top:34px; color:#fff; font-size:31px; font-weight:500;
+    letter-spacing:.42em; text-indent:.42em;
+  }
+  #splashLine {
+    position:relative; margin-top:18px; width:270px; max-width:70vw; height:1.5px;
+    border-radius:1px; background:rgba(203,213,225,.55);
+  }
+  #splashSub {
+    position:relative; margin-top:15px; color:rgba(255,255,255,.8);
+    font-size:13.5px; font-weight:500; letter-spacing:.06em;
+  }
+</style>
+
+
 <div id="updateBanner">
   <span>새 버전의 교과서가 도착했습니다.</span>
   <button id="updateBtn" type="button">업데이트</button>
@@ -593,6 +708,103 @@
     </div>
   </section>
 
+  <!-- ═══════════ p.5 : 생각 넓히기 (극한의 성질) ═══════════ -->
+  <section class="bookpage" data-title="생각 넓히기" data-demo="p5">
+    <div class="bm-ribbon"></div>
+    <span class="chap-tag">1단원 · 함수의 극한과 연속</span>
+    <h2>생각 넓히기 — 극한의 성질</h2>
+    <p class="p5q"><i>f</i>와 <i>g</i>는 각각 수렴하지 않는데, <i>f</i>+<i>g</i>는 수렴할 수 있을까?</p>
+
+    <div class="block">
+      <button class="p5propToggle" id="p5prop" type="button">극한의 성질 보기 ▾</button>
+      <div id="p5propBox">
+        <div class="hd">두 함수 <i>f</i>(x), <i>g</i>(x)에서 lim<sub>x→a</sub> <i>f</i>(x) = L, lim<sub>x→a</sub> <i>g</i>(x) = M (L, M은 실수)일 때</div>
+        <div><b>1</b> lim<sub>x→a</sub> c<i>f</i>(x) = c L &nbsp;<span style="font-size:.82em;color:var(--text-muted)">(단, c는 상수)</span></div>
+        <div><b>2</b> lim<sub>x→a</sub> { <i>f</i>(x) + <i>g</i>(x) } = L + M</div>
+        <div><b>3</b> lim<sub>x→a</sub> { <i>f</i>(x) − <i>g</i>(x) } = L − M</div>
+        <div><b>4</b> lim<sub>x→a</sub> <i>f</i>(x)<i>g</i>(x) = L M</div>
+        <div><b>5</b> lim<sub>x→a</sub> <i>f</i>(x) / <i>g</i>(x) = L / M &nbsp;<span style="font-size:.82em;color:var(--text-muted)">(단, M ≠ 0)</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="p5fnrow">
+        <div class="p5fnpanel">
+          <div class="p5fnhead">
+            <span class="p5fnname f">f(x)</span>
+            <div class="p5tabs">
+              <button class="on" data-fn="p5f" data-type="plain" type="button">일반함수</button>
+              <button data-fn="p5f" data-type="pw" type="button">구간함수</button>
+            </div>
+          </div>
+          <div id="p5fPlain"><input class="p5exp" id="p5fExp" value="1/x" autocomplete="off" spellcheck="false" /></div>
+          <div class="p5pw" id="p5fPw">
+            <div class="p5pwline">
+              <span class="p5pwcond">x &lt;</span><input class="p5brk" id="p5fBrk" value="0" />
+              <input class="p5exp" id="p5fE1" value="x+1" autocomplete="off" spellcheck="false" />
+            </div>
+            <div class="p5pwline">
+              <span class="p5pwcond">x ≥ <span id="p5fBrk2">0</span></span>
+              <input class="p5exp" id="p5fE2" value="x-1" autocomplete="off" spellcheck="false" />
+            </div>
+          </div>
+        </div>
+        <div class="p5fnpanel">
+          <div class="p5fnhead">
+            <span class="p5fnname g">g(x)</span>
+            <div class="p5tabs">
+              <button class="on" data-fn="p5g" data-type="plain" type="button">일반함수</button>
+              <button data-fn="p5g" data-type="pw" type="button">구간함수</button>
+            </div>
+          </div>
+          <div id="p5gPlain"><input class="p5exp" id="p5gExp" value="1/x" autocomplete="off" spellcheck="false" /></div>
+          <div class="p5pw" id="p5gPw">
+            <div class="p5pwline">
+              <span class="p5pwcond">x &lt;</span><input class="p5brk" id="p5gBrk" value="0" />
+              <input class="p5exp" id="p5gE1" value="x-2" autocomplete="off" spellcheck="false" />
+            </div>
+            <div class="p5pwline">
+              <span class="p5pwcond">x ≥ <span id="p5gBrk2">0</span></span>
+              <input class="p5exp" id="p5gE2" value="x" autocomplete="off" spellcheck="false" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p5ctrls">
+        <div class="p5ops">
+          <button class="on" data-op="add" type="button">f + g</button>
+          <button data-op="sub" type="button">f − g</button>
+          <button data-op="mul" type="button">f × g</button>
+          <button data-op="div" type="button">f ÷ g</button>
+        </div>
+        <span class="p5alab">x →</span><input class="p5aval" id="p5a" value="0" />
+        <button class="p5go" id="p5draw" type="button">그리기</button>
+        <button class="p5hintbtn" id="p5hint" type="button">💡 힌트</button>
+      </div>
+      <p id="p5err"></p>
+      <div id="p5hintBox"></div>
+    </div>
+
+    <div class="block">
+      <div class="p5graphs">
+        <div class="p5colS">
+          <canvas id="p5cvF" width="620" height="460"></canvas>
+          <canvas id="p5cvG" width="620" height="460"></canvas>
+        </div>
+        <div class="p5colB">
+          <canvas id="p5cvC" width="900" height="680"></canvas>
+        </div>
+      </div>
+      <p class="p5note">● 함숫값 &nbsp;·&nbsp; ○ 도달하지 않는 극한값</p>
+      <table class="p5tbl">
+        <thead><tr><th></th><th>좌극한</th><th>우극한</th><th>극한값</th></tr></thead>
+        <tbody id="p5tb"></tbody>
+      </table>
+      <p id="p5verdict"></p>
+    </div>
+  </section>
+
 </div>
 
 <!-- ═══════════ 승인 대기 잠금 ═══════════ -->
@@ -655,8 +867,16 @@
 (function(){
   "use strict";
 
-  var APP_VERSION = "1.6.0";
+  var APP_VERSION = "1.8.0";
   document.getElementById("verLabel").textContent = "v" + APP_VERSION;
+
+  /* 로딩화면: 잠깐 보여주고 부드럽게 사라짐 */
+  setTimeout(function(){
+    var sp = document.getElementById("splash");
+    if (!sp) return;
+    sp.classList.add("hide");
+    setTimeout(function(){ if (sp.parentNode) sp.parentNode.removeChild(sp); }, 650);
+  }, 1400);
 
   /* ========== storage (책갈피) ========== */
   var store = {
@@ -717,6 +937,7 @@
     if (demo === "p2") p2render(0);
     if (demo === "p3" && window.p3api) window.p3api.render(0);
     if (demo === "p4") p4render(0);
+    if (demo === "p5" && window.p5render) window.p5render();
   }
 
   prevBtn.addEventListener("click", function(){ gotoPage(current - 1); });
@@ -2297,6 +2518,377 @@
 
     render();
     updateReadout();
+  })();
+
+  /* ================================================= */
+  /* p.5 — 생각 넓히기 : 극한의 성질                    */
+  /* ================================================= */
+  (function(){
+  "use strict";
+
+  /* ═══════ 파서 ═══════ */
+  var FUNCS={sin:Math.sin,cos:Math.cos,tan:Math.tan,asin:Math.asin,acos:Math.acos,atan:Math.atan,
+             sqrt:Math.sqrt,abs:Math.abs,exp:Math.exp,ln:Math.log,log:Math.log10};
+  var NAMES=Object.keys(FUNCS).concat(["pi","e","x"]).sort(function(a,b){return b.length-a.length;});
+  function tokenize(src){
+    src=src.replace(/\s+/g,"").replace(/²/g,"^2").replace(/³/g,"^3").replace(/π/g,"pi")
+           .replace(/−/g,"-").replace(/×/g,"*").replace(/÷/g,"/").replace(/√/g,"sqrt");
+    var t=[],i=0;
+    while(i<src.length){
+      var ch=src[i];
+      var m=/^(\d+\.?\d*|\.\d+)/.exec(src.slice(i));
+      if(m){t.push({t:"num",v:parseFloat(m[0])});i+=m[0].length;continue;}
+      if(/[a-zA-Z]/.test(ch)){
+        var got=null;
+        for(var k=0;k<NAMES.length;k++){
+          if(src.slice(i,i+NAMES[k].length).toLowerCase()===NAMES[k]){got=NAMES[k];break;}
+        }
+        if(!got) throw new Error("모르는 문자: "+ch);
+        t.push({t:"id",v:got}); i+=got.length; continue;
+      }
+      if("+-*/^()".indexOf(ch)!==-1){t.push({t:ch});i++;continue;}
+      throw new Error("모르는 기호: "+ch);
+    }
+    return t;
+  }
+  function bin(op,a,b){
+    if(op==="+")return function(x){return a(x)+b(x);};
+    if(op==="-")return function(x){return a(x)-b(x);};
+    if(op==="*")return function(x){return a(x)*b(x);};
+    return function(x){return a(x)/b(x);};
+  }
+  function negf(a){return function(x){return -a(x);};}
+  function powf(a,b){return function(x){return Math.pow(a(x),b(x));};}
+  function constf(v){return function(){return v;};}
+  function applyf(fn,a){return function(x){return fn(a(x));};}
+  function parseExpr(src){
+    if(!src.trim()) throw new Error("식이 비어 있어요");
+    var toks=tokenize(src),pos=0;
+    function peek(){return toks[pos];} function next(){return toks[pos++];}
+    function expr(){var f=term();while(peek()&&(peek().t==="+"||peek().t==="-")){var o=next().t;f=bin(o,f,term());}return f;}
+    function term(){var f=unary();
+      while(peek()){var p=peek();
+        if(p.t==="*"||p.t==="/"){var o=next().t;f=bin(o,f,unary());}
+        else if(p.t==="num"||p.t==="id"||p.t==="("){f=bin("*",f,unary());}
+        else break;}
+      return f;}
+    function unary(){if(peek()&&peek().t==="-"){next();return negf(unary());}return power();}
+    function power(){var b=atom();if(peek()&&peek().t==="^"){next();return powf(b,unary());}return b;}
+    function atom(){
+      var p=next(); if(!p) throw new Error("식이 갑자기 끝났어요");
+      if(p.t==="num")return constf(p.v);
+      if(p.t==="("){var f=expr(); if(!peek()||next().t!==")")throw new Error("닫는 괄호 )가 빠졌어요"); return f;}
+      if(p.t==="id"){
+        if(p.v==="x")return function(x){return x;};
+        if(p.v==="pi")return constf(Math.PI);
+        if(p.v==="e")return constf(Math.E);
+        var fn=FUNCS[p.v];
+        if(!peek()||next().t!=="(")throw new Error(p.v+" 뒤에는 괄호가 필요해요");
+        var arg=expr(); if(!peek()||next().t!==")")throw new Error("닫는 괄호 )가 빠졌어요");
+        return applyf(fn,arg);
+      }
+      throw new Error("이 위치에 올 수 없는 기호가 있어요");
+    }
+    var f=expr(); if(pos<toks.length)throw new Error("식 끝에 해석할 수 없는 부분이 있어요");
+    return f;
+  }
+
+  /* ═══════ 상태 ═══════ */
+  var type={p5f:"plain",p5g:"plain"};
+  var OP="add";
+  var A=0;
+  var Ff=null,Gg=null,Cc=null,BRK=[];
+  var CVF=document.getElementById("p5cvF"),CVG=document.getElementById("p5cvG"),CVC=document.getElementById("p5cvC");
+
+  function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+
+  function buildFn(key){
+    if(type[key]==="plain"){
+      var e=parseExpr(document.getElementById(key+"Exp").value);
+      return {ev:e,brk:[]};
+    }
+    var c=parseFloat(document.getElementById(key+"Brk").value.replace(/−/g,"-"));
+    if(isNaN(c)) throw new Error("구간 경계는 숫자로 적어 주세요");
+    var e1=parseExpr(document.getElementById(key+"E1").value);
+    var e2=parseExpr(document.getElementById(key+"E2").value);
+    return {ev:function(x){return x<c?e1(x):e2(x);},brk:[c]};
+  }
+  function safe(fn,x){
+    try{var v=fn(x);return (typeof v==="number"&&isFinite(v))?v:NaN;}catch(e){return NaN;}
+  }
+  function combine(op,f,g){
+    if(op==="add")return function(x){return f(x)+g(x);};
+    if(op==="sub")return function(x){return f(x)-g(x);};
+    if(op==="mul")return function(x){return f(x)*g(x);};
+    return function(x){return f(x)/g(x);};
+  }
+  function opSym(op){return op==="add"?"+":op==="sub"?"−":op==="mul"?"×":"÷";}
+
+  /* 좌/우극한 추정 */
+  function sideLimit(fn,sign){
+    var hs=[1e-5,1e-6,1e-7],vals=[];
+    for(var i=0;i<hs.length;i++){
+      var v=safe(fn,A+sign*hs[i]);
+      if(isNaN(v))return null;
+      vals.push(v);
+    }
+    var last=vals[vals.length-1];
+    if(Math.abs(last)>1e6)return null;                       // 발산
+    if(Math.abs(vals[0]-last)>Math.max(1e-3,Math.abs(last)*0.02))return null; // 진동/발산
+    return last;
+  }
+  function fmt(v){
+    if(v===null)return null;
+    if(Math.abs(v)<1e-9)v=0;
+    var out;
+    if(Math.abs(v-Math.round(v))<1e-6) out=String(Math.round(v));
+    else out=v.toFixed(3).replace(/0+$/,"").replace(/\.$/,"");
+    return out.replace("-","\u2212");
+  }
+
+  /* ═══════ 그리기 (f / g 작게, 조합 크게) ═══════ */
+  function niceStep(range,target){
+    var raw=range/target,mag=Math.pow(10,Math.floor(Math.log10(raw))),r=raw/mag;
+    return (r<1.5?1:r<3.5?2:r<7.5?5:10)*mag;
+  }
+  function yRangeOf(fns,xMin,xMax){
+    var vals=[];
+    fns.forEach(function(fn){
+      for(var i=0;i<=280;i++){
+        var v=safe(fn,xMin+(xMax-xMin)*i/280);
+        if(!isNaN(v))vals.push(v);
+      }
+    });
+    if(!vals.length)return{lo:-4,hi:4};
+    vals.sort(function(a,b){return a-b;});
+    var lo=vals[Math.floor(vals.length*0.08)],hi=vals[Math.floor(vals.length*0.92)];
+    lo=Math.min(lo,0);hi=Math.max(hi,0);
+    var pad=Math.max((hi-lo)*0.2,0.8);
+    lo-=pad;hi+=pad;
+    if(hi-lo>26){lo=-13;hi=13;}
+    return{lo:lo,hi:hi};
+  }
+
+  function panel(canvas,fn,color,label,yr,bold){
+    var ctx=canvas.getContext("2d");
+    var W=canvas.width,H=canvas.height;
+    var rect=canvas.getBoundingClientRect();
+    var k=(rect.width>40)?(W/rect.width):1.5;          // 화면 대비 배율 → 글씨/선 두께 보정
+    var FS=Math.max(11,Math.round(12.5*k));
+    var xMin=A-4.2,xMax=A+4.2,yMin=yr.lo,yMax=yr.hi;
+
+    var padL=Math.round(FS*3.1),padR=Math.round(FS*0.9),padT=Math.round(FS*2.4),padB=Math.round(FS*2.2);
+    var pw=W-padL-padR,ph=H-padT-padB;
+    function sx(x){return padL+(x-xMin)/(xMax-xMin)*pw;}
+    function sy(y){return padT+(1-(y-yMin)/(yMax-yMin))*ph;}
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle="#fff";ctx.fillRect(0,0,W,H);
+
+    // 격자 + 눈금
+    ctx.strokeStyle="#e6e5df";ctx.lineWidth=1*k;
+    ctx.font=FS+"px Georgia,serif";ctx.fillStyle="#8a8a86";
+    var xs=niceStep(xMax-xMin,6);
+    for(var t=Math.ceil(xMin/xs)*xs;t<=xMax;t+=xs){
+      var px=sx(t);
+      ctx.beginPath();ctx.moveTo(px,padT);ctx.lineTo(px,padT+ph);ctx.stroke();
+      if(Math.abs(t-A)>xs*0.3){
+        ctx.textAlign="center";ctx.textBaseline="top";
+        ctx.fillText(fmt(t),px,padT+ph+FS*0.45);
+      }
+    }
+    var ys=niceStep(yMax-yMin,5);
+    for(var u=Math.ceil(yMin/ys)*ys;u<=yMax;u+=ys){
+      var py=sy(u);
+      ctx.beginPath();ctx.moveTo(padL,py);ctx.lineTo(padL+pw,py);ctx.stroke();
+      if(Math.abs(u)>ys*0.01){
+        ctx.textAlign="right";ctx.textBaseline="middle";
+        ctx.fillText(fmt(u),padL-FS*0.5,py);
+      }
+    }
+    // 축
+    ctx.strokeStyle="#555";ctx.lineWidth=1.8*k;
+    if(yMin<0&&yMax>0){ctx.beginPath();ctx.moveTo(padL,sy(0));ctx.lineTo(padL+pw,sy(0));ctx.stroke();}
+    if(xMin<0&&xMax>0){ctx.beginPath();ctx.moveTo(sx(0),padT);ctx.lineTo(sx(0),padT+ph);ctx.stroke();}
+    // x = a
+    ctx.save();ctx.setLineDash([5*k,5*k]);ctx.strokeStyle="#b9b8b2";ctx.lineWidth=1.4*k;
+    ctx.beginPath();ctx.moveTo(sx(A),padT);ctx.lineTo(sx(A),padT+ph);ctx.stroke();ctx.restore();
+    ctx.font="italic "+Math.round(FS*1.1)+"px Georgia,serif";ctx.fillStyle="#777";
+    ctx.textAlign="center";ctx.textBaseline="top";
+    ctx.fillText("a",sx(A),padT+ph+FS*0.45);
+
+    // 곡선
+    ctx.strokeStyle=color;ctx.lineWidth=(bold?3.4:2.6)*k;
+    ctx.lineJoin="round";ctx.lineCap="round";
+    var N=640,started=false,prevY=0;
+    ctx.beginPath();
+    for(var i=0;i<=N;i++){
+      var x=xMin+(xMax-xMin)*i/N;
+      if(BRK.some(function(c){return Math.abs(x-c)<(xMax-xMin)/N*0.9;})){started=false;continue;}
+      var y=safe(fn,x);
+      if(isNaN(y)){started=false;continue;}
+      var py=sy(y);
+      if(py<padT-ph||py>padT+ph*2){started=false;continue;}
+      if(started&&Math.abs(py-prevY)>ph*0.55){started=false;}
+      if(!started){ctx.moveTo(sx(x),py);started=true;}else{ctx.lineTo(sx(x),py);}
+      prevY=py;
+    }
+    ctx.stroke();
+
+    // ● 함숫값 / ○ 도달하지 않는 극한값
+    var fa=safe(fn,A),l=sideLimit(fn,-1),r=sideLimit(fn,1),R=5.5*k;
+    function on(py){return py>=padT-8&&py<=padT+ph+8;}
+    [l,r].forEach(function(v){
+      if(v===null)return;
+      if(!isNaN(fa)&&Math.abs(v-fa)<1e-9)return;
+      var py=sy(v);if(!on(py))return;
+      ctx.beginPath();ctx.arc(sx(A),py,R,0,7);
+      ctx.fillStyle="#fff";ctx.fill();ctx.lineWidth=2.2*k;ctx.strokeStyle=color;ctx.stroke();
+    });
+    if(!isNaN(fa)){
+      var pa=sy(fa);
+      if(on(pa)){ctx.beginPath();ctx.arc(sx(A),pa,R,0,7);ctx.fillStyle=color;ctx.fill();
+        ctx.lineWidth=1.8*k;ctx.strokeStyle="#fff";ctx.stroke();}
+    }
+
+    // 패널 이름
+    ctx.font="italic "+Math.round(FS*1.45)+"px Georgia,'Times New Roman',serif";
+    ctx.fillStyle=color;ctx.textAlign="left";ctx.textBaseline="top";
+    ctx.fillText(label,padL,Math.round(FS*0.55));
+  }
+
+  function draw(){
+    var xMin=A-4.2,xMax=A+4.2;
+    var yFG=yRangeOf([Ff,Gg],xMin,xMax);      // f와 g는 같은 눈금으로 비교
+    var yC=yRangeOf([Cc],xMin,xMax);
+    var col={f:cssv("--series-1"),g:cssv("--series-2"),c:cssv("--series-3")};
+    panel(CVF,Ff,col.f,"f(x)",yFG,false);
+    panel(CVG,Gg,col.g,"g(x)",yFG,false);
+    panel(CVC,Cc,col.c,"f(x) "+opSym(OP)+" g(x)",yC,true);
+  }
+
+  /* ═══════ 표 & 결론 ═══════ */
+  function row(name,fn,cls){
+    var l=sideLimit(fn,-1),r=sideLimit(fn,1);
+    var same=(l!==null&&r!==null&&Math.abs(l-r)<1e-4);
+    var lim=same?fmt(l):null;
+    return {html:"<tr><td class='nm' style='color:"+cls+"'>"+name+"</td>"+
+      "<td>"+(l===null?"—":fmt(l))+"</td>"+
+      "<td>"+(r===null?"—":fmt(r))+"</td>"+
+      "<td class='"+(same?"yes":"no")+"'>"+(same?lim:"없음")+"</td></tr>", ok:same, val:lim};
+  }
+  function refresh(){
+    var col={f:cssv("--series-1"),g:cssv("--series-2"),c:cssv("--series-3")};
+    var rf=row("f(x)",Ff,col.f), rg=row("g(x)",Gg,col.g);
+    var cname="f(x) "+opSym(OP)+" g(x)";
+    var rc=row(cname,Cc,col.c);
+    document.getElementById("p5tb").innerHTML=rf.html+rg.html+rc.html;
+    var v=document.getElementById("p5verdict");
+    if(!rf.ok&&!rg.ok&&rc.ok){
+      v.innerHTML="<span class='hit'>찾았다!</span> <i>f</i>도 <i>g</i>도 극한이 없지만, "+
+        cname+"의 극한은 존재해요 — 그 값은 <b>"+rc.val+"</b>.";
+    } else if(rf.ok&&rg.ok){
+      v.innerHTML="<span class='miss'>둘 다 수렴하는 경우예요.</span> 이때는 극한의 성질이 그대로 성립하죠. 수렴하지 <i>않는</i> 두 함수로 바꿔 보세요.";
+    } else if(rc.ok){
+      v.innerHTML="한쪽만 수렴하지 않는 경우예요. <i>f</i>와 <i>g</i> <b>둘 다</b> 극한이 없도록 만들어 보세요.";
+    } else {
+      v.innerHTML="아직은 "+cname+"의 극한도 존재하지 않아요. 좌극한과 우극한이 <b>서로 같아지도록</b> 두 함수를 조정해 보세요.";
+    }
+  }
+
+  function apply(){
+    var e=document.getElementById("p5err");
+    e.classList.remove("show");
+    var a=parseFloat(document.getElementById("p5a").value.replace(/−/g,"-"));
+    if(isNaN(a)){e.textContent="x → 값은 숫자로 적어 주세요.";e.classList.add("show");return;}
+    A=a;
+    try{
+      var F=buildFn("p5f"),G=buildFn("p5g");
+      Ff=F.ev;Gg=G.ev;BRK=F.brk.concat(G.brk);
+      Ff(1.2345);Gg(1.2345);
+      Cc=combine(OP,Ff,Gg);
+    }catch(err){
+      e.textContent="식을 이해하지 못했어요 — "+err.message;e.classList.add("show");return;
+    }
+    draw();refresh();
+  }
+
+  /* ═══════ 힌트 ═══════ */
+  var HINTS={
+    add:{txt:"두 함수의 <b>점프 방향이 서로 반대</b>가 되게 만들면, 더할 때 상쇄돼요.",
+         ex:"f(x) = x+1 (x&lt;0), x−1 (x≥0) &nbsp;/&nbsp; g(x) = x−2 (x&lt;0), x (x≥0)",
+         set:{p5f:["pw","0","x+1","x-1"],p5g:["pw","0","x-2","x"]}},
+    sub:{txt:"두 함수가 <b>같은 크기로 같은 방향</b>으로 점프하면, 뺄 때 사라져요.",
+         ex:"f(x) = x+1 (x&lt;0), x−1 (x≥0) &nbsp;/&nbsp; g(x) = x+2 (x&lt;0), x (x≥0)",
+         set:{p5f:["pw","0","x+1","x-1"],p5g:["pw","0","x+2","x"]}},
+    mul:{txt:"부호가 −1과 1로 튀는 함수를 <b>두 번 곱하면</b> 항상 같은 값이 돼요.",
+         ex:"f(x) = 1 (x&lt;0), −1 (x≥0) &nbsp;/&nbsp; g(x) = 1 (x&lt;0), −1 (x≥0)",
+         set:{p5f:["pw","0","1","-1"],p5g:["pw","0","1","-1"]}},
+    div:{txt:"두 함수가 <b>같은 배율로</b> 튀면, 나눌 때 그 배율만 남아요.",
+         ex:"f(x) = 1 (x&lt;0), −1 (x≥0) &nbsp;/&nbsp; g(x) = 2 (x&lt;0), −2 (x≥0)",
+         set:{p5f:["pw","0","1","-1"],p5g:["pw","0","2","-2"]}}
+  };
+  var hintBox=document.getElementById("p5hintBox");
+  document.getElementById("p5hint").addEventListener("click",function(){
+    if(hintBox.classList.contains("show")){hintBox.classList.remove("show");return;}
+    var h=HINTS[OP];
+    hintBox.innerHTML="💡 "+h.txt+"<div class='ex' style='margin-top:7px'>"+h.ex+"</div>"+
+      "<button type='button' id='p5useEx'>이 예시 넣어 보기</button>";
+    hintBox.classList.add("show");
+    document.getElementById("p5useEx").addEventListener("click",function(){
+      ["p5f","p5g"].forEach(function(k){
+        var s=h.set[k];
+        setType(k,s[0]);
+        document.getElementById(k+"Brk").value=s[1];
+        document.getElementById(k+"Brk2").textContent=s[1];
+        document.getElementById(k+"E1").value=s[2];
+        document.getElementById(k+"E2").value=s[3];
+      });
+      document.getElementById("p5a").value="0";
+      hintBox.classList.remove("show");
+      apply();
+    });
+  });
+
+  /* ═══════ UI 이벤트 ═══════ */
+  function setType(key,t){
+    type[key]=t;
+    document.querySelectorAll('.p5tabs button[data-fn="'+key+'"]').forEach(function(b){
+      b.classList.toggle("on",b.getAttribute("data-type")===t);
+    });
+    document.getElementById(key+"Plain").style.display=(t==="plain")?"block":"none";
+    document.getElementById(key+"Pw").classList.toggle("show",t==="pw");
+  }
+  document.querySelectorAll(".p5tabs button").forEach(function(b){
+    b.addEventListener("click",function(){
+      setType(b.getAttribute("data-fn"),b.getAttribute("data-type"));
+    });
+  });
+  ["p5f","p5g"].forEach(function(k){
+    document.getElementById(k+"Brk").addEventListener("input",function(){
+      document.getElementById(k+"Brk2").textContent=this.value||"0";
+    });
+  });
+  document.querySelectorAll(".p5ops button").forEach(function(b){
+    b.addEventListener("click",function(){
+      OP=b.getAttribute("data-op");
+      document.querySelectorAll(".p5ops button").forEach(function(o){o.classList.toggle("on",o===b);});
+      hintBox.classList.remove("show");
+      apply();
+    });
+  });
+  document.getElementById("p5draw").addEventListener("click",apply);
+  document.querySelectorAll(".p5exp,.brk,.aval").forEach(function(el){
+    el.addEventListener("keydown",function(e){if(e.key==="Enter")apply();});
+  });
+  document.getElementById("p5prop").addEventListener("click",function(){
+    var box=document.getElementById("p5propBox");
+    box.classList.toggle("show");
+    this.textContent = box.classList.contains("show") ? "극한의 성질 닫기 ▴" : "극한의 성질 보기 ▾";
+  });
+
+  apply();
+  window.p5render=function(){ try{ draw(); }catch(e){} };
   })();
 
   /* ========== theme change re-render ========== */
