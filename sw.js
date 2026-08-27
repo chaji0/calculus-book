@@ -3,7 +3,7 @@
  * ★ 교과서 내용을 수정해서 새로 올릴 때는 아래 VERSION 숫자를 반드시 하나 올려 주세요.
  *   (예: v1.0.0 → v1.0.1)  이 숫자가 바뀌어야 학생들의 앱이 새 버전을 받아옵니다.
  */
-var VERSION = "v1.0.9";
+var VERSION = "v1.0.10";
 
 var CACHE = "moving-calc-" + VERSION;
 var ASSETS = [
@@ -29,7 +29,11 @@ self.addEventListener("activate", function (e) {
         keys.filter(function (k) { return k.indexOf("moving-calc-") === 0 && k !== CACHE; })
             .map(function (k) { return caches.delete(k); })
       );
-    }).then(function () { return self.clients.claim(); })
+    }).then(function () {
+      /* 3D 탭용 three.js 는 설치를 막지 않도록 "되면 좋고" 방식으로 미리 받아 둔다 */
+      caches.open(CACHE).then(function (c) { return c.add("./three.min.js"); }).catch(function () {});
+      return self.clients.claim();
+    })
   );
 });
 
